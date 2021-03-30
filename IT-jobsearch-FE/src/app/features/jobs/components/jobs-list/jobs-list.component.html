@@ -1,0 +1,7 @@
+<div class="items" *ngIf="jobs$ | async as jobs">
+  <app-job-item
+    *ngFor="let job of jobs"
+    (click)="details(job.id)"
+    [job]="job"
+  ></app-job-item>
+<mat-spinner *ngIf="isLoading"></mat-spinner>

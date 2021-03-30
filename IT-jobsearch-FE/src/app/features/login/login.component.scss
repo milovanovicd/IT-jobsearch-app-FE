@@ -1,0 +1,73 @@
+.main {
+  height: 100%;
+  background-image: url("../../../assets/background-blue.jpeg");
+  background-size: 100% 50%;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .container {
+    position: relative;
+    h1 {
+      position: absolute;
+      top: 50px;
+      font-size: 36px;
+    }
+    border-radius: 15px;
+    font-size: 16px;
+    background-color: #f3f3f3;
+    width: 500px;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .form-container {
+      width: 400px;
+      margin-bottom: 15px;
+      ::ng-deep mat-radio-group {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 15px;
+
+        mat-radio-button:not(:last-child) {
+          font-size: 16px;
+          margin-right: 20px;
+        }
+      }
+      .control {
+        margin: 0;
+        label {
+          margin-bottom: 10px;
+        }
+        input {
+          border-radius: 4px;
+          border-color: rgb(0, 0, 0, 0.3);
+          padding: 10px 15px ;
+          margin-bottom: 15px;
+          display: block;
+          width: 100%;
+          box-sizing:border-box;
+        }
+      }
+    }
+    button[type="submit"] {
+      width: 100%;
+      font-size: 16px;
+    }
+
+    p {
+      text-align: center;
+
+      .toggle-link {
+        text-decoration: underline;
+        cursor: pointer;
+        &:hover {
+          color: #2196f3;
+        }
+      }
+    }
+
+  }
+}

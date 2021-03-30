@@ -1,8 +1,16 @@
 <mat-toolbar color="light">
-  <span><strong>Job</strong>Search</span>
+  <span><img class="logo" src="../../../../assets/logo-black.svg" alt="jobsearch-logo-black"></span>
+  <nav class="nav main">
+    <ul>
+      <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Home</a></li>
+      <li><a routerLink="/jobs" routerLinkActive="active">Search Jobs</a></li>
+      <li><a routerLink="/companies" routerLinkActive="active">Search Companies</a></li>
+    </ul>
+  </nav>
   <span class="example-spacer"></span>
-  <button mat-button>Home</button>
-  <button mat-button>Search Jobs</button>
-  <button mat-button>Search Companies</button>
-  <button mat-raised-button color="primary">Register</button>
+    <nav class="nav secondary">
+      <ul>
+        <li><button mat-flat-button color="primary" routerLink="/login" routerLinkActive="active">Get Started</button></li>
+      </ul>
+    </nav>
 </mat-toolbar>

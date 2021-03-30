@@ -1,0 +1,10 @@
+<div class="container">
+  <div class="header">
+    <p class="company">{{job.company.name}}</p>
+    <span class="daysAgo"><embed src="../../../../../assets/wall-clock.svg"/>{{daysAgo}} days ago</span>
+  </div>
+  <div class="main"><h1 class="title">{{job.name}}</h1></div>
+  <div class="technologies">
+    <div *ngFor="let tech of job.technologies" class="badge">{{tech}}</div>
+  </div>
+</div>

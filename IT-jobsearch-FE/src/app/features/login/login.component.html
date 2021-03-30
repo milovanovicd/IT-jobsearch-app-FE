@@ -1,1 +1,23 @@
-<p>login works!</p>
+<section class="main">
+  <div class="container">
+    <h1>{{isSignUp ? "Sign Up As" : "Sign In"}}</h1>
+    <div class="form-container">
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <mat-radio-group *ngIf="isSignUp" formControlName="accountType" class="radio-group" aria-label="Select an option">
+          <mat-radio-button value="company">Company</mat-radio-button>
+          <mat-radio-button value="candidate">Candidate</mat-radio-button>
+        </mat-radio-group>
+        <div class="control">
+          <label>Email:</label>
+          <input type="email" placeholder="Enter your email..." formControlName="email" />
+        </div>
+        <div class="control">
+          <label>Password:</label>
+          <input type="password" placeholder="Enter your password..." formControlName="password" />
+        </div>
+        <button mat-flat-button color="primary" type="submit" [disabled]="loginForm.invalid">{{isSignUp ? "Sign Up" : "Sign In"}}</button>
+      </form>
+    </div>
+    <p>{{isSignUp ? "" : "Don't "}}Have An Account? <a class="toggle-link" (click)="toggle()">{{isSignUp ? "Sign In" : "Sign Up"}}</a></p>
+  </div>
+</section>

@@ -1,3 +1,36 @@
-.example-spacer {
-  flex: 1 1 auto;
+:host {
+  .example-spacer {
+    flex: 1 1 auto;
+  }
+
+  .logo {
+    max-width: 150px;
+    vertical-align: middle;
+  }
+  .nav ul {
+    li {
+    display: inline-block;
+    font-weight: normal;
+
+    button {
+      font-size: 18px;
+    }
+
+    &:not(:last-child){
+      padding-right: 15px;
+    }
+
+    a {
+      font-size: 18px;
+      font-weight: 500;
+      text-decoration: none;
+      color: black;
+      transition: 0.3s all;
+
+      &.active, &:active, &:hover {
+        color: #0186f7;
+      }
+    }
+  }
+}
 }
