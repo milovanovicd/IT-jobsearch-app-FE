@@ -6,6 +6,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { FooterComponent } from './components/footer/footer.component';
 import { RouterModule } from '@angular/router';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { CoreModule } from '../core/core.module';
+import { MatMenuModule } from '@angular/material/menu';
 
 
 @NgModule({
@@ -14,8 +17,11 @@ import { RouterModule } from '@angular/router';
     CommonModule,
     MatToolbarModule,
     MatIconModule,
+    MatMenuModule,
+    MatProgressSpinnerModule,
     MatButtonModule,
-    RouterModule
+    RouterModule,
+    CoreModule
   ],
   exports:[...fromComponents.components]
 })

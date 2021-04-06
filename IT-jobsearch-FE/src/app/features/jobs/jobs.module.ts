@@ -3,13 +3,13 @@ import { CommonModule } from '@angular/common';
 import { JobsService } from './jobs.service';
 import * as fromComponents from './components/index';
 import * as fromPages from './pages/index';
-import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [...fromComponents.components, ...fromPages.pages],
-  imports: [CommonModule, HttpClientModule, RouterModule, MatProgressSpinnerModule],
+  imports: [CommonModule, RouterModule, MatProgressSpinnerModule, MatButtonModule],
   providers: [JobsService],
   exports: [...fromComponents.components, ...fromPages.pages],
 })

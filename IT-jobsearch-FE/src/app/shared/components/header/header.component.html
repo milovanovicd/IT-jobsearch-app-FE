@@ -8,9 +8,40 @@
     </ul>
   </nav>
   <span class="example-spacer"></span>
-    <nav class="nav secondary">
+    <nav *ngIf="!isLoggedIn()" class="nav secondary">
       <ul>
         <li><button mat-flat-button color="primary" routerLink="/login" routerLinkActive="active">Get Started</button></li>
       </ul>
     </nav>
+    <div *ngIf="isLoggedIn()">
+      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+        <mat-icon>account_circle</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <ng-container *ngIf="isCompany()">
+          <button mat-menu-item>
+            <mat-icon>business</mat-icon>
+            <span>Company Profile</span>
+          </button>
+          <button mat-menu-item>
+            <mat-icon>work</mat-icon>
+            <span>Posted Jobs</span>
+          </button>
+        </ng-container>
+        <ng-container *ngIf="isCandidate()">
+          <button mat-menu-item>
+            <mat-icon>person</mat-icon>
+            <span>My Profile</span>
+          </button>
+          <button mat-menu-item>
+            <mat-icon>work</mat-icon>
+            <span>My Jobs</span>
+          </button>
+        </ng-container>
+        <button mat-menu-item (click)="onLogout()">
+          <mat-icon>logout</mat-icon>
+          <span>Logout</span>
+        </button>
+      </mat-menu>
+    </div>
 </mat-toolbar>

@@ -1,5 +1,50 @@
-<ng-container *ngIf="job$ | async as job">
-  <p>ID:{{job.id}}works!</p>
-  <p>Name:{{job.name}}works!</p>
-  <p>Description:{{job.description}} works!</p>
-</ng-container>
+<section class="jumbotron">
+  <div class="search-container">
+    <div class="content"></div>
+  </div>
+</section>
+<section class="job-container" *ngIf="job$ | async as job">
+  <div class="container">
+    <div class="header">
+      <p class="company">{{job.company.name}}</p>
+    </div>
+    <div class="main"><h1 class="title">{{job.name}}</h1></div>
+    <div class="technologies">
+      <div *ngFor="let tech of job.technologies" class="badge">{{tech}}</div>
+    </div>
+  </div>
+  <div class="job-info">
+    <div class="info-item">
+      <p class="info-title">Seniority</p>
+      <p class="info-description">{{job.seniority}}</p>
+    </div>
+    <div class="info-item">
+      <p class="info-title">Published</p>
+      <p class="info-description">{{job.publishedDate | date}}</p>
+    </div>
+    <div class="info-item">
+      <p class="info-title">Deadline</p>
+      <p class="info-description">{{job.deadlineDate | date}}</p>
+    </div>
+    <div class="info-item">
+      <p class="info-title">Location</p>
+      <p class="info-description">{{job.company.location}}</p>
+    </div>
+  </div>
+  <div class="job-description">
+    <h2>Description</h2>
+    <p>{{job.description}}</p>
+  </div>
+  <button
+    mat-flat-button
+    color="primary"
+    class="apply-button"
+    (click)="onApplyJob(job.id)"
+  >
+    Apply Now
+  </button>
+  <div class="job-description">
+    <h2>Similar jobs</h2>
+    <p>Similar jobs here</p>
+  </div>
+</section>

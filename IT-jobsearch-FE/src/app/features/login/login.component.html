@@ -2,20 +2,31 @@
   <div class="container">
     <h1>{{isSignUp ? "Sign Up As" : "Sign In"}}</h1>
     <div class="form-container">
-      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
         <mat-radio-group *ngIf="isSignUp" formControlName="accountType" class="radio-group" aria-label="Select an option">
           <mat-radio-button value="company">Company</mat-radio-button>
           <mat-radio-button value="candidate">Candidate</mat-radio-button>
         </mat-radio-group>
         <div class="control">
           <label>Email:</label>
-          <input type="email" placeholder="Enter your email..." formControlName="email" />
+          <input type="email" placeholder="Enter your email..." formControlName="email" required/>
+          <!-- <mat-error *ngIf="loginForm.controls['email'].valid || loginForm.controls['email'].untouched">
+            <span>EMAIL_IS_REQUIRED</span>
+          </mat-error> -->
         </div>
         <div class="control">
           <label>Password:</label>
           <input type="password" placeholder="Enter your password..." formControlName="password" />
+          <!-- <mat-error *ngIf="loginForm.controls['password'].valid || loginForm.controls['password'].untouched">
+            <span>PASSWORD_IS_REQUIRED</span>
+          </mat-error> -->
         </div>
-        <button mat-flat-button color="primary" type="submit" [disabled]="loginForm.invalid">{{isSignUp ? "Sign Up" : "Sign In"}}</button>
+        <mat-slide-toggle color="primary" formControlName="remember">Remember me</mat-slide-toggle>
+        <button mat-flat-button color="primary" type="submit" [disabled]="loginForm.invalid || isLoading">
+          <app-loader class="inline-loader" [isLoading]="isLoading"></app-loader>
+          {{isSignUp ? "Sign Up" : "Sign In"}}
+        </button>
+        <br />
       </form>
     </div>
     <p>{{isSignUp ? "" : "Don't "}}Have An Account? <a class="toggle-link" (click)="toggle()">{{isSignUp ? "Sign In" : "Sign Up"}}</a></p>

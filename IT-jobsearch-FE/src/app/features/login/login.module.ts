@@ -4,6 +4,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { LoginComponent } from './login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatInputModule } from '@angular/material/input';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 
 
@@ -12,8 +15,11 @@ import { MatRadioModule } from '@angular/material/radio';
   imports: [
     CommonModule,
     MatButtonModule,
+    MatInputModule,
     MatRadioModule,
-    ReactiveFormsModule
+    MatSlideToggleModule,
+    ReactiveFormsModule,
+    SharedModule
   ],
   exports: [LoginComponent]
 })

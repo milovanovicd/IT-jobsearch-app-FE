@@ -21,4 +21,8 @@ export class JobDetailsPageComponent implements OnInit {
       this.job$ = this._jobsService.get(params['id']).pipe(take(1), tap(_ => this.isLoading= false));
     });
   }
+
+  onApplyJob(jobId: any){
+    console.log("Apply for Job: " + jobId);
+  }
 }
