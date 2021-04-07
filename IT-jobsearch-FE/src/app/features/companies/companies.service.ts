@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { CompanyDto } from 'src/app/shared/dto/company.dto';
 import { CreateCompanyDto } from 'src/app/shared/dto/createCompany.dto';
 import { environment } from 'src/environments/environment';
 
@@ -12,7 +13,7 @@ export class CompaniesService {
 
   constructor(private _http: HttpClient) {}
 
-  get(id: any) {
+  get(id: any): Observable<any> {
     return this._http.get(`${environment.apiURL}${this.path}/${id}`);
   }
 

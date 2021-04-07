@@ -15,6 +15,16 @@ export interface LoginContext {
   accountType?: string;
 }
 
+export interface UserCandidate {
+  id: string;
+  fullName: string;
+}
+
+export interface UserCompany {
+  id: string;
+  name: string;
+}
+
 /**
  * Provides a base for authentication workflow.
  * The login/logout methods should be replaced with proper implementation.
@@ -29,7 +39,6 @@ export class AuthService {
    * @return The user credentials.
    */
   login(context: LoginContext): Observable<boolean> {
-    console.log(context);
     const user = {
       username: context.email,
       password: context.password
@@ -37,12 +46,15 @@ export class AuthService {
 
     return this.http.post(`${environment.authURL}/signin`, user).pipe(
       map((res: any) => {
+        console.log(this.credentialsService.decodeToken(res.token));
         this.credentialsService.setCredentials(
           {
             username: context.email,
-            token: res.token
+            token: res.token,
+            company: this.credentialsService.decodeToken(res.token).company,
+            candidate: this.credentialsService.decodeToken(res.token).candidate
           },
-          context.remember
+          context.remember,
         );
         return true;
       }),
@@ -77,7 +89,19 @@ export class AuthService {
   logout(): Observable<boolean> {
     // Customize credentials invalidation here
     this.credentialsService.setCredentials();
+    this.credentialsService.setCompany();
+    this.credentialsService.setCandidate();
     return of(true);
+  }
+
+  getCompany(): UserCompany {
+    const { company } = this.decodedToken;
+    return company !== undefined ? company : null;
+  }
+
+  getCandidate(): UserCandidate {
+    const { candidate } = this.decodedToken;
+    return candidate !== undefined ? candidate : null;
   }
 
   get decodedToken() {

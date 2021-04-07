@@ -31,4 +31,8 @@ export class HeaderComponent implements OnInit {
     this._router.navigate(['/login']);
   }
 
+  onCompanyProfile() {
+    this._router.navigate(['/company-profile']);
+  }
+
 }

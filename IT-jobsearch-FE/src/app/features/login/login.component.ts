@@ -57,49 +57,8 @@ export class LoginComponent implements OnInit, OnDestroy {
       )
       .subscribe(
         (credentials) => {
-          console.log(credentials);
+          console.log('Credidentials', credentials);
           this._router.navigate(['/home']);
-          // if (this.authenticationService.isCustomer) {
-          //   this.accountPanelService
-          //     .fetchAllCustomersFormated()
-          //     .pipe(take(1))
-          //     .subscribe((customers) => {
-          //       localStorage.setItem(
-          //         allCustomersKey,
-          //         JSON.stringify(customers)
-          //       );
-          //       if (customers.length > 1) {
-          //         this.router.navigate(
-          //           [
-          //             this.route.snapshot.queryParams.redirect ||
-          //               'customer-profile/select-type',
-          //           ],
-          //           {
-          //             replaceUrl: true,
-          //           }
-          //         );
-          //       } else {
-          //         localStorage.setItem(
-          //           currentCustomerKey,
-          //           JSON.stringify(customers[0])
-          //         );
-          //         this.router.navigate(
-          //           [
-          //             this.route.snapshot.queryParams.redirect ||
-          //               'customer-profile',
-          //           ],
-          //           {
-          //             replaceUrl: true,
-          //           }
-          //         );
-          //       }
-          //     });
-          // } else {
-          //   this.router.navigate(
-          //     [this.route.snapshot.queryParams.redirect || '/home'],
-          //     { replaceUrl: true }
-          //   );
-          // }
         },
         (error) => {
           this.error = error;

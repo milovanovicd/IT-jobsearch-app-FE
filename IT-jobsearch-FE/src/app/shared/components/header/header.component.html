@@ -19,7 +19,7 @@
       </button>
       <mat-menu #menu="matMenu">
         <ng-container *ngIf="isCompany()">
-          <button mat-menu-item>
+          <button mat-menu-item (click)="onCompanyProfile()">
             <mat-icon>business</mat-icon>
             <span>Company Profile</span>
           </button>

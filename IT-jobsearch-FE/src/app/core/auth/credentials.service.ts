@@ -4,13 +4,18 @@ export interface Credentials {
   // Customize received credentials here
   username: string;
   token: string;
+  company?: string;
+  candidate?: string;
 }
 
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { CompanyDto } from 'src/app/shared/dto/company.dto';
 import { Role } from './role.enum';
 const jwtHelper = new JwtHelperService();
 
 const credentialsKey = 'credentials';
+const companyKey = 'company';
+const candidateKey = 'candidate';
 
 /**
  * Provides storage for authentication credentials.
@@ -67,6 +72,26 @@ export class CredentialsService {
     } else {
       sessionStorage.removeItem(credentialsKey);
       localStorage.removeItem(credentialsKey);
+    }
+  }
+
+  setCompany(company?: CompanyDto){
+    const companyToAdd = company || null;
+
+    if (company) {
+      localStorage.setItem(companyKey, JSON.stringify(companyToAdd));
+    } else {
+      localStorage.removeItem(companyKey);
+    }
+  }
+
+  setCandidate(candidate?: any){
+    const candidateToAdd = candidate || null;
+
+    if (candidate) {
+      localStorage.setItem(candidateKey, JSON.stringify(candidateToAdd));
+    } else {
+      localStorage.removeItem(candidateKey);
     }
   }
 
