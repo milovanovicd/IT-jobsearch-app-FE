@@ -1,5 +1,9 @@
 import { Injectable } from '@angular/core';
 
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { CompanyDto } from 'src/app/shared/dto/company.dto';
+import { Role } from './role.enum';
+
 export interface Credentials {
   // Customize received credentials here
   username: string;
@@ -7,10 +11,15 @@ export interface Credentials {
   company?: string;
   candidate?: string;
 }
+export interface UserCandidate {
+  id: string;
+  fullName: string;
+}
+export interface UserCompany {
+  id: string;
+  name: string;
+}
 
-import { JwtHelperService } from '@auth0/angular-jwt';
-import { CompanyDto } from 'src/app/shared/dto/company.dto';
-import { Role } from './role.enum';
 const jwtHelper = new JwtHelperService();
 
 const credentialsKey = 'credentials';
@@ -46,6 +55,32 @@ export class CredentialsService {
    */
   get credentials(): Credentials | null {
     return this._credentials;
+  }
+
+  /**
+   * Check if user is Candidate.
+   * @return True if the user is Candidate.
+   */
+  get isCandidate() {
+    return this.isAuthenticated() && this.getDecodedToken().role.includes(Role.Candidate);
+  }
+
+  /**
+   * Check if user is Company.
+   * @return True if the user is Company.
+   */
+  get isCompany() {
+    return this.isAuthenticated() && this.getDecodedToken().role.includes(Role.Company);
+  }
+
+  getCompany(): UserCompany {
+    const { company } = this.getDecodedToken();
+    return company !== undefined ? company : null;
+  }
+
+  getCandidate(): UserCandidate {
+    const { candidate } = this.getDecodedToken();
+    return candidate !== undefined ? candidate : null;
   }
 
   getDecodedToken() {

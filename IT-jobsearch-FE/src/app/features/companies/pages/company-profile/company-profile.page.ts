@@ -18,7 +18,6 @@ export class CompanyProfilePageComponent implements OnInit {
 
   constructor(
     private _companiesService: CompaniesService,
-    private _authService: AuthService,
     private _credentialsService: CredentialsService
   ) {}
 
@@ -27,8 +26,8 @@ export class CompanyProfilePageComponent implements OnInit {
       sessionStorage.getItem(companyKey) || localStorage.getItem(companyKey);
 
     if (!savedCompany) {
-      console.log(this._authService.decodedToken.company);
-      const { id } = this._authService.decodedToken.company;
+      console.log(this._credentialsService.getCompany());
+      const { id } = this._credentialsService.getCompany();
       this.company$ = this._companiesService.get(id).pipe(
         tap((company) => {
           this._credentialsService.setCompany(company);

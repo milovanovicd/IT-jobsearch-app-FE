@@ -1,0 +1,24 @@
+div.form-container {
+
+  h1 {
+    margin-bottom: 30px;
+  }
+
+  max-width: 500px;
+  margin: 0 auto;
+  box-sizing: border-box;
+
+  .form-field {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 0px 5px;
+
+    &.w-50{
+      width: 50%;
+    }
+  }
+
+  .form-buttons {
+    text-align: right;
+  }
+}

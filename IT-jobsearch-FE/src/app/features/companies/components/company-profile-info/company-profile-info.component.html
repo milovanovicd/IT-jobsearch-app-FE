@@ -1,0 +1,69 @@
+
+
+<div class="form-container">
+  <h1>Company Profile</h1>
+  <form *ngIf="companyForm" [formGroup]="companyForm" (submit)="onUpdate()">
+    <!-- Name -->
+    <mat-form-field class="form-field" appearance="outline">
+      <mat-label>Name</mat-label>
+      <input matInput placeholder="Name" formControlName="name" required>
+      <mat-error *ngIf="companyForm.controls.name.touched && companyForm.controls.name.invalid">
+        <span *ngIf="companyForm.controls.name.errors.required">This field is required.</span>
+      </mat-error>
+    </mat-form-field>
+    <!-- Name -->
+    <!-- Description -->
+    <mat-form-field class="form-field" appearance="outline">
+      <mat-label>Description</mat-label>
+      <textarea matInput placeholder="Description" formControlName="description" required></textarea>
+      <mat-error *ngIf="companyForm.controls.description.touched && companyForm.controls.description.invalid">
+        <span *ngIf="companyForm.controls.description.errors.required">This field is required.</span>
+      </mat-error>
+    </mat-form-field>
+    <!-- Description -->
+    <!-- Location -->
+    <mat-form-field class="form-field w-50" appearance="outline">
+      <mat-label>Location</mat-label>
+      <input matInput placeholder="Location" formControlName="location" required>
+      <mat-error *ngIf="companyForm.controls.location.touched && companyForm.controls.location.invalid">
+        <span *ngIf="companyForm.controls.location.errors.required">This field is required.</span>
+      </mat-error>
+    </mat-form-field>
+    <!-- Location -->
+    <!-- No. of Employees -->
+    <mat-form-field class="form-field w-50" appearance="outline">
+      <mat-label>No. of Employees</mat-label>
+      <input matInput placeholder="No. Of Employees" formControlName="noOfEmployees" required>
+      <mat-error *ngIf="companyForm.controls.noOfEmployees.touched && companyForm.controls.noOfEmployees.invalid">
+        <span *ngIf="companyForm.controls.noOfEmployees.errors.required">This field is required.</span>
+      </mat-error>
+    </mat-form-field>
+    <!-- No. of Employees -->
+    <!-- Industry -->
+    <div class="form-field">
+      <ng-select
+        [items]="industriesArray"
+        bindLabel="label"
+        bindValue="value"
+        [multiple]="false"
+        placeholder="Select Industry"
+        clearAllText="Clear"
+        formControlName="industry">
+      </ng-select>
+    </div>
+    <!-- <mat-form-field class="form-field" appearance="outline">
+      <mat-label>Industry</mat-label>
+      <input matInput placeholder="Industry" formControlName="industry" required>
+      <mat-error *ngIf="companyForm.controls.industry.touched && companyForm.controls.industry.invalid">
+        <span *ngIf="companyForm.controls.industry.errors.required">This field is required.</span>
+      </mat-error>
+    </mat-form-field> -->
+    <!-- Industry -->
+    <div class="form-buttons">
+      <button *ngIf='isEditable' mat-raised-button color="primary" type="submit">Save</button>
+      <button *ngIf='isEditable' mat-raised-button color="warn" (click)='toggleEdit()'>Cancel</button>
+      <button *ngIf='!isEditable' mat-raised-button color="primary" (click)='toggleEdit()'>Edit</button>
+    </div>
+  </form>
+</div>
+<app-progress-spinner [displayProgressSpinner]="isLoading"></app-progress-spinner>

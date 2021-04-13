@@ -15,16 +15,6 @@ export interface LoginContext {
   accountType?: string;
 }
 
-export interface UserCandidate {
-  id: string;
-  fullName: string;
-}
-
-export interface UserCompany {
-  id: string;
-  name: string;
-}
-
 /**
  * Provides a base for authentication workflow.
  * The login/logout methods should be replaced with proper implementation.
@@ -94,29 +84,7 @@ export class AuthService {
     return of(true);
   }
 
-  getCompany(): UserCompany {
-    const { company } = this.decodedToken;
-    return company !== undefined ? company : null;
-  }
-
-  getCandidate(): UserCandidate {
-    const { candidate } = this.decodedToken;
-    return candidate !== undefined ? candidate : null;
-  }
-
-  get decodedToken() {
-    return this.credentialsService.getDecodedToken();
-  }
-
   get loggedIn() {
     return this.credentialsService.isAuthenticated();
-  }
-
-  get isCandidate() {
-    return this.credentialsService.isAuthenticated() && this.credentialsService.getDecodedToken().role.includes(Role.Candidate);
-  }
-
-  get isCompany() {
-    return this.credentialsService.isAuthenticated() && this.credentialsService.getDecodedToken().role.includes(Role.Company);
   }
 }

@@ -9,10 +9,11 @@ import { RouterModule } from '@angular/router';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { CoreModule } from '../core/core.module';
 import { MatMenuModule } from '@angular/material/menu';
-
+import { AppOverlayModule } from './components/overlay/overlay.module';
+import { ProgressSpinnerComponent, ProgressSpinnerModule } from './components/progress-spinner/progress-spinner.module';
 
 @NgModule({
-  declarations: [...fromComponents.components, FooterComponent],
+  declarations: [...fromComponents.components],
   imports: [
     CommonModule,
     MatToolbarModule,
@@ -21,8 +22,9 @@ import { MatMenuModule } from '@angular/material/menu';
     MatProgressSpinnerModule,
     MatButtonModule,
     RouterModule,
-    CoreModule
+    CoreModule,
+    AppOverlayModule,
   ],
-  exports:[...fromComponents.components]
+  exports: [...fromComponents.components],
 })
-export class SharedModule { }
+export class SharedModule {}

@@ -1,3 +1,30 @@
-<ng-container *ngIf="company$ | async as company">
-  <p>Company Name: {{company.name}}</p>
-</ng-container>
+<div class="container">
+  <div class="sidenav">
+    <mat-nav-list>
+      <mat-list>
+        <mat-list-item
+          style="cursor: pointer"
+          routerLink="/company-profile/profile"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{exact:true}"
+          >Profile</mat-list-item
+        >
+        <mat-list-item
+          style="cursor: pointer"
+          routerLink="/company-profile/jobs"
+          routerLinkActive="active"
+          >Jobs</mat-list-item
+        >
+        <mat-list-item
+          style="cursor: pointer"
+          routerLink="/company-profile/applications"
+          routerLinkActive="active"
+          >Applications</mat-list-item
+        >
+      </mat-list>
+    </mat-nav-list>
+  </div>
+  <div class="content">
+    <router-outlet></router-outlet>
+  </div>
+</div>

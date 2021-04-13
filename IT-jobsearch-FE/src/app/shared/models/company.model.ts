@@ -6,6 +6,7 @@ export class Company {
   id: any;
   user: User;
   name: string;
+  description: string;
   location: string;
   noOfEmployees: number;
   industry: Industry;
@@ -15,6 +16,7 @@ export class Company {
     id?: any,
     user?: User,
     name?: string,
+    description?: string,
     location?: string,
     noOfEmployees?: number,
     industry?: Industry,
@@ -23,6 +25,7 @@ export class Company {
     this.id = id;
     this.user = user;
     this.name = name;
+    this.description = description;
     this.location = location;
     this.noOfEmployees = noOfEmployees;
     this.industry = industry;

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { JobsService } from '../../jobs.service';
-import { take, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { AuthService } from 'src/app/core/auth/auth.service';
+import { CredentialsService } from 'src/app/core/auth/credentials.service';
 
 @Component({
   selector: 'app-job-details',
@@ -17,7 +17,7 @@ export class JobDetailsPageComponent implements OnInit {
   constructor(
     private _jobsService: JobsService,
     private _activatedRoute: ActivatedRoute,
-    private _authService: AuthService
+    private _credidentialsService: CredentialsService
   ) {}
 
   ngOnInit(): void {
@@ -29,7 +29,7 @@ export class JobDetailsPageComponent implements OnInit {
   }
 
   isCandidate() {
-    return this._authService.isCandidate;
+    return this._credidentialsService.isCandidate;
   }
 
   onApplyJob(jobId: any) {

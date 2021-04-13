@@ -21,11 +21,11 @@ export class CompaniesService {
     return this._http.get(`${environment.apiURL}${this.path}`);
   }
 
-  create(data: CreateCompanyDto) {
+  create(data: CreateCompanyDto): Observable<any> {
     return this._http.post(`${environment.apiURL}${this.path}`, data);
   }
 
-  update(id: any, data: CreateCompanyDto) {
+  update(id: any, data: CreateCompanyDto): Observable<any> {
     return this._http.put(`${environment.apiURL}${this.path}/${id}`, data);
   }
 
