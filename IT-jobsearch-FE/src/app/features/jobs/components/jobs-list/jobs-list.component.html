@@ -1,7 +1,21 @@
-<div class="items" *ngIf="jobs$ | async as jobs">
-  <app-job-item
-    *ngFor="let job of jobs"
-    (click)="details(job.id)"
-    [job]="job"
-  ></app-job-item>
+<ng-container *ngIf="!isCompany">
+  <div class="items" *ngIf="jobs$ | async as jobs">
+    <app-job-item
+      *ngFor="let job of jobs"
+      (click)="details(job.id)"
+      [job]="job"
+    ></app-job-item>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="isCompany">
+  <div class="items">
+    <app-job-item
+      *ngFor="let job of companyJobs"
+      (click)="details(job.id)"
+      [job]="job"
+    ></app-job-item>
+  </div>
+</ng-container>
+
 <mat-spinner *ngIf="isLoading"></mat-spinner>

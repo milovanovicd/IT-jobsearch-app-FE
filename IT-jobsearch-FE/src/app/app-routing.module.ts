@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { CompaniesPageComponent, CompanyDetailsPageComponent, CompanyProfilePageComponent } from './features/companies/pages';
+import { CompaniesSearchPageComponent, CompanyDetailsPageComponent, CompanyProfilePageComponent } from './features/companies/pages';
 import { HomeComponent } from './features/home/home.component';
 import { JobDetailsPageComponent } from './features/jobs/pages/job-details/job-details.page';
-import { JobsPageComponent } from './features/jobs/pages/jobs/jobs.page.';
+import { JobsSearchPageComponent } from './features/jobs/pages/jobs-search/jobs-search.page.';
 import { LoginComponent } from './features/login/login.component';
 
 
@@ -19,14 +19,14 @@ const routes: Routes = [
   {
     path: 'jobs',
     children: [
-      {path: '', component: JobsPageComponent},
+      {path: '', component: JobsSearchPageComponent},
       {path: ':id', component: JobDetailsPageComponent}
     ]
   },
   {
     path: 'companies',
     children: [
-      {path: '', component: CompaniesPageComponent},
+      {path: '', component: CompaniesSearchPageComponent},
       {path: 'profile', component: CompanyProfilePageComponent, pathMatch: 'full'},
       {path: ':id', component: CompanyDetailsPageComponent}
     ]

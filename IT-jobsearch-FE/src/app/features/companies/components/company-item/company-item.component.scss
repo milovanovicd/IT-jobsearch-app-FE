@@ -19,51 +19,41 @@
       color: gray;
       justify-content: space-between;
 
-      .company {
+      .industry {
         font-size: 18px;
         margin-bottom: 0px;
       }
+    }
 
-      .daysAgo {
-        width: 100%;
+    .main h1 {
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+
+    .company-info {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+
+      .icon {
         display: flex;
-        justify-content: flex-end;
         align-items: center;
+        font-size: 16px;
+
+        &:not(:last-child){
+          margin-right: 20px;
+        }
 
         embed {
-          max-width: 20px;
+          width: 100%;
+          max-width: 25px;
+          max-height: 25px;
           margin-right: 10px;
 
           svg {
             fill: gray !important;
           }
         }
-      }
-    }
-
-    .technologies {
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-
-      .badge {
-        background-color: #fdd835;
-        padding: 5px 10px;
-        text-transform: uppercase;
-        color: white;
-        text-align: center;
-        font-weight: 500;
-        border-radius: 15px;
-
-        &:not(:last-child) {
-          margin-right: 5px;
-        }
-      }
-    }
-    .main {
-      h1 {
-        font-weight: 500;
-        margin-bottom: 10px;
       }
     }
   }

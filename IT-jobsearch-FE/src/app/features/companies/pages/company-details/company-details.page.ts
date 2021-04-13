@@ -20,11 +20,13 @@ export class CompanyDetailsPageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this._activatedRoute.params.pipe(take(1)).subscribe((params) => {
-      this.isLoading = true;
-      this.company$ = this._companiesService.get(params['id']).pipe(
-        tap((_) => (this.isLoading = false))
-      );
-    });
+    const id = this._activatedRoute.snapshot.paramMap.get('id');
+    this.isLoading = true;
+    this.company$ = this._companiesService
+      .get(id)
+      .pipe(tap((company) => {
+        console.log(company);
+        this.isLoading = false;
+      }));
   }
 }

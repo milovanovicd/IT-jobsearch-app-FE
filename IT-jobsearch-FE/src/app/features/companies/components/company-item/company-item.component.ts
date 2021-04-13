@@ -4,6 +4,7 @@ import {
   Input,
   OnInit,
 } from '@angular/core';
+import { Company } from 'src/app/shared/models/company.model';
 
 @Component({
   selector: 'app-company-item',
@@ -12,7 +13,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CompanyItemComponent implements OnInit {
-  @Input() company;
+  @Input() company: Company;
 
   constructor() {}
 

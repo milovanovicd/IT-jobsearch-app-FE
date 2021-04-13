@@ -21,15 +21,14 @@ export class JobDetailsPageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this._activatedRoute.params.pipe(take(1)).subscribe((params) => {
-      this.isLoading = true;
-      this.job$ = this._jobsService.get(params['id']).pipe(
-        tap((_) => (this.isLoading = false))
-      );
-    });
+    const id = this._activatedRoute.snapshot.paramMap.get('id');
+    this.isLoading = true;
+    this.job$ = this._jobsService
+      .get(id)
+      .pipe(tap((_) => (this.isLoading = false)));
   }
 
-  isCandidate(){
+  isCandidate() {
     return this._authService.isCandidate;
   }
 

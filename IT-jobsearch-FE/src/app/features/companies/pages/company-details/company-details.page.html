@@ -1,3 +1,27 @@
-<ng-container *ngIf="company$ | async as company">
-  <p>Company Name: {{company.name}}</p>
-</ng-container>
+<section class="jumbotron">
+  <div class="search-container">
+    <div class="content"></div>
+  </div>
+</section>
+<section class="job-container" *ngIf="company$ | async as company">
+  <div class="container">
+    <div class="header">
+      <p class="company">{{company.industry}}</p>
+    </div>
+    <div class="main"><h1 class="title">{{company.name}}</h1></div>
+    <div class="company-info">
+      <span class="icon"><embed src="../../../../../assets/location.svg"/>{{company.location}}</span>
+      <span class="icon"><embed src="../../../../../assets/employees.svg"/>{{company.noOfEmployees}}</span>
+      <span class="icon"><embed src="../../../../../assets/jobs.svg"/>{{company.jobs.length}} open jobs</span>
+    </div>
+  </div>
+  <div class="job-description">
+    <h2>Description</h2>
+    <p>{{company.description}}</p>
+  </div>
+
+  <div class="job-description">
+    <h2>Jobs</h2>
+    <app-jobs-list [companyJobs]="company.jobs"></app-jobs-list>
+  </div>
+</section>

@@ -1,1 +1,7 @@
-<p>Companies List works</p>
+<div class="items" *ngIf="companies$ | async as companies">
+  <app-company-item
+    *ngFor="let company of companies"
+    (click)="details(company.id)"
+    [company]="company"
+  ></app-company-item>
+<mat-spinner *ngIf="isLoading"></mat-spinner>

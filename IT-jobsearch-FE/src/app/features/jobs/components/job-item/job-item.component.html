@@ -1,6 +1,6 @@
 <div class="container">
   <div class="header">
-    <p class="company">{{job.company.name}}</p>
+    <p class="company">{{job.company.name ? job.company.name : job.company}}</p>
     <span class="daysAgo"><embed src="../../../../../assets/wall-clock.svg"/>{{daysAgo}} days ago</span>
   </div>
   <div class="main"><h1 class="title">{{job.name}}</h1></div>
