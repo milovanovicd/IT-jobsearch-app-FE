@@ -10,7 +10,7 @@ import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
   selector: 'app-progress-spinner',
   templateUrl: './progress-spinner.component.html'
 })
-export class ProgressSpinnerComponent {
+export class ProgressSpinnerComponent implements OnInit {
   @Input() color?: ThemePalette = 'primary';
   @Input() diameter?: number = 100;
   @Input() mode?: ProgressSpinnerMode = 'indeterminate';
@@ -20,7 +20,7 @@ export class ProgressSpinnerComponent {
   @Input() positionGloballyCenter = true;
   @Input() displayProgressSpinner: boolean;
 
-  @ViewChild('progressSpinnerRef')
+  @ViewChild('progressSpinnerRef', { read: TemplateRef, static: true })
   private progressSpinnerRef: TemplateRef<any>;
   private progressSpinnerOverlayConfig: AppOverlayConfig;
   private overlayRef: OverlayRef;
@@ -38,6 +38,7 @@ export class ProgressSpinnerComponent {
     // Create Overlay for progress spinner
     this.overlayRef = this.overlayService.createOverlay(this.progressSpinnerOverlayConfig);
   }
+
   ngDoCheck() {
     // Based on status of displayProgressSpinner attach/detach overlay to progress spinner template
     if (this.displayProgressSpinner && !this.overlayRef.hasAttached()) {

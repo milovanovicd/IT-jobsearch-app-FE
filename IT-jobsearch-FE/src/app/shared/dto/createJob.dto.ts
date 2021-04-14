@@ -1,10 +1,12 @@
+import { SeniorityType } from "../enums/enums";
+
 export class CreateJobDto {
   name: string;
   description: string;
   publishedDate: Date;
   deadlineDate: Date;
   position: string;
-  seniority: string;
+  seniority: SeniorityType;
   companyId: any;
   technologies: string[];
 
@@ -14,7 +16,7 @@ export class CreateJobDto {
     publishedDate?: Date,
     deadlineDate?: Date,
     position?: string,
-    seniority?: string,
+    seniority?: SeniorityType,
     companyId?: any,
     technologies?: string[]
   ) {

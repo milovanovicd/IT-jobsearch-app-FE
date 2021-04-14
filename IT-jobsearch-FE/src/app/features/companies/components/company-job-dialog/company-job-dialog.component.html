@@ -1,0 +1,100 @@
+<div mat-dialog-title>
+  Create Job
+</div>
+<mat-dialog-content class="mat-typography">
+  <app-progress-spinner [displayProgressSpinner]="isLoading"></app-progress-spinner>
+  <form [formGroup]="form">
+    <!-- Name -->
+    <mat-form-field class="form-field" appearance="outline">
+      <mat-label>Name</mat-label>
+      <input matInput placeholder="Enter job name/title" formControlName="name" required>
+      <mat-error *ngIf="form.controls.name.touched && form.controls.name.invalid">
+        <span *ngIf="form.controls.name.errors.required">This field is required.</span>
+      </mat-error>
+    </mat-form-field>
+    <!-- Name -->
+    <!-- Description -->
+    <mat-form-field class="form-field" appearance="outline">
+      <mat-label>Description</mat-label>
+      <textarea matInput placeholder="Enter job description" formControlName="description" required></textarea>
+      <mat-error *ngIf="form.controls.description.touched && form.controls.description.invalid">
+        <span *ngIf="form.controls.description.errors.required">This field is required.</span>
+      </mat-error>
+    </mat-form-field>
+    <!-- Description -->
+    <!-- Published Date -->
+    <mat-form-field class="form-field" appearance="outline">
+      <mat-label>Published Date</mat-label>
+      <input matInput [matDatepicker]="publishedDatePicker" formControlName="publishedDate">
+      <mat-datepicker-toggle matSuffix [for]="publishedDatePicker"></mat-datepicker-toggle>
+      <mat-datepicker #publishedDatePicker></mat-datepicker>
+    </mat-form-field>
+    <!-- Published Date -->
+    <!-- Deadline Date -->
+    <mat-form-field class="form-field" appearance="outline">
+      <mat-label>Deadline Date</mat-label>
+      <input matInput [matDatepicker]="deadlineDatePicker" formControlName="deadlineDate">
+      <mat-datepicker-toggle matSuffix [for]="deadlineDatePicker"></mat-datepicker-toggle>
+      <mat-datepicker #deadlineDatePicker disabled="false"></mat-datepicker>
+    </mat-form-field>
+    <!-- Deadline Date -->
+    <!-- Positions -->
+    <div class="form-field">
+      <ng-select
+        [items]="positions"
+        bindLabel="label"
+        bindValue="value"
+        [multiple]="false"
+        placeholder="Select position"
+        clearAllText="Clear"
+        formControlName="position"
+        addTagText="Create New"
+        [addTag]="addTechTag">>
+      </ng-select>
+    </div>
+    <!-- Positions -->
+    <!-- Seniority -->
+    <div class="form-field">
+      <ng-select
+        [items]="seniorities"
+        bindLabel="label"
+        bindValue="value"
+        [multiple]="false"
+        placeholder="Select seniority"
+        clearAllText="Clear"
+        formControlName="seniority">
+      </ng-select>
+    </div>
+    <!-- Seniority -->
+    <!-- Technologies -->
+    <div class="form-field">
+      <ng-select
+        [items]="technologies"
+        bindLabel="label"
+        bindValue="value"
+        [multiple]="true"
+        placeholder="Technologies..."
+        clearAllText="Clear"
+        formControlName="technologies"
+        addTagText="Create New"
+        [addTag]="addTechTag">
+      </ng-select>
+    </div>
+    <!-- Technologies -->
+  </form>
+  <br />
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-flat-button color="warn" mat-dialog-close cdkFocusInitial>
+    Close
+  </button>
+  <button
+    mat-flat-button
+    color="primary"
+    [disabled]="!form.valid"
+    (click)="submit()"
+  >
+    Submit
+  </button>
+</mat-dialog-actions>
+

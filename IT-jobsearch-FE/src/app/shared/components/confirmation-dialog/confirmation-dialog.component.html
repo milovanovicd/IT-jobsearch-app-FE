@@ -1,0 +1,10 @@
+<div mat-dialog-title>
+  Are you sure?
+</div>
+<div mat-dialog-content class="confirmation-dialog-content">
+  {{ message}}
+</div>
+<div mat-dialog-actions class="confirmation-dialog-actions">
+  <button mat-raised-button color="warn" class="btn-default" (click)="onNoClick()">No</button>
+  <button mat-raised-button color="primary" [mat-dialog-close]="true" cdkFocusInitial>Yes</button>
+</div>

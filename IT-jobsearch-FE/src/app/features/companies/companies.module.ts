@@ -12,7 +12,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { ProgressSpinnerModule } from 'src/app/shared/components/progress-spinner/progress-spinner.module';
-
+import { MatTableModule } from '@angular/material/table';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [...fromComponents.components, ...fromPages.pages],
@@ -22,6 +27,12 @@ import { ProgressSpinnerModule } from 'src/app/shared/components/progress-spinne
     MatListModule,
     MatInputModule,
     MatButtonModule,
+    MatTooltipModule,
+    MatTableModule,
+    MatIconModule,
+    MatDialogModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     JobsModule,
     ReactiveFormsModule,
     RouterModule,

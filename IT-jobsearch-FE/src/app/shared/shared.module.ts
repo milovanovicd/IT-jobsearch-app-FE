@@ -4,13 +4,13 @@ import * as fromComponents from './components';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { FooterComponent } from './components/footer/footer.component';
 import { RouterModule } from '@angular/router';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { CoreModule } from '../core/core.module';
 import { MatMenuModule } from '@angular/material/menu';
 import { AppOverlayModule } from './components/overlay/overlay.module';
-import { ProgressSpinnerComponent, ProgressSpinnerModule } from './components/progress-spinner/progress-spinner.module';
+import { MetadataService } from './services/metadata.service';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [...fromComponents.components],
@@ -18,6 +18,7 @@ import { ProgressSpinnerComponent, ProgressSpinnerModule } from './components/pr
     CommonModule,
     MatToolbarModule,
     MatIconModule,
+    MatDialogModule,
     MatMenuModule,
     MatProgressSpinnerModule,
     MatButtonModule,
@@ -26,5 +27,6 @@ import { ProgressSpinnerComponent, ProgressSpinnerModule } from './components/pr
     AppOverlayModule,
   ],
   exports: [...fromComponents.components],
+  providers: [MetadataService]
 })
 export class SharedModule {}

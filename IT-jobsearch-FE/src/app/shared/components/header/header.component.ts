@@ -37,4 +37,8 @@ export class HeaderComponent implements OnInit {
   onCompanyProfile() {
     this._router.navigate(['/company-profile']);
   }
+
+  onPostedJobs() {
+    this._router.navigate(['/company-profile/jobs']);
+  }
 }

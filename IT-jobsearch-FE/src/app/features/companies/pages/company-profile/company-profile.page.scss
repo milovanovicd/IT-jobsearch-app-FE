@@ -3,13 +3,13 @@
 :host {
 
   .container {
-    box-sizing: border-box;
+
     width: 100%;
     height: 100%;
     display: flex;
 
     .sidenav {
-      box-sizing: border-box;
+
       width: 100%;
       max-height: 300px;
       min-width: 200px;
@@ -35,7 +35,7 @@
     }
 
     .content {
-      box-sizing: border-box;
+
       max-width: 80%;
       width: 100%;
       padding: 16px;

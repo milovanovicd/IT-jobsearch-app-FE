@@ -1,0 +1,90 @@
+import { Component, Inject, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { take } from 'rxjs/operators';
+import { CredentialsService } from 'src/app/core/auth/credentials.service';
+import { SeniorityTypeLabel, SeniorityTypeReverseLabel } from 'src/app/shared/enums/enums';
+import { mapMetadataValues, mapToArray } from 'src/app/shared/helpers/helper-methods';
+import { MetadataService } from 'src/app/shared/services/metadata.service';
+import * as moment from 'moment';
+
+@Component({
+  selector: 'app-company-job-dialog',
+  templateUrl: './company-job-dialog.component.html',
+  styleUrls: ['./company-job-dialog.component.scss'],
+})
+export class CompanyJobDialogComponent implements OnInit {
+  form: FormGroup;
+  companyId: any;
+  isLoading = false;
+  positions = [];
+  seniorities = [];
+  technologies = [];
+
+  constructor(
+    private _fb: FormBuilder,
+    public dialogRef: MatDialogRef<CompanyJobDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public job: any,
+    private _credidentialsService: CredentialsService,
+    private _metadataService: MetadataService
+  ) {}
+
+  ngOnInit(): void {
+    this.companyId = this._credidentialsService.getCompany().id;
+
+    this.createForm();
+    if (!!this.job) {
+      this.prepareForUpdate();
+    }
+    this.fillOptions();
+  }
+
+  submit(){
+    const formData = this.form.getRawValue();
+
+    const job = {
+      ...formData,
+      publishedDate: moment(formData.publishedDate).format('DD.MM.YYYY'),
+      deadlineDate: moment(formData.deadlineDate).format('DD.MM.YYYY')
+    };
+    console.log(job);
+    this.dialogRef.close(job);
+  }
+
+  fillOptions(){
+    this.isLoading = true;
+    this.seniorities = mapToArray(SeniorityTypeLabel);
+    this._metadataService.getAll().pipe(take(1)).subscribe(({positions, technologies}) => {
+      this.positions = mapMetadataValues(positions);
+      this.technologies = mapMetadataValues(technologies);
+      this.isLoading = false;
+    });
+  }
+
+  prepareForUpdate(){
+    const updatedJob = {
+      ...this.job,
+      seniority: SeniorityTypeReverseLabel.get(this.job.seniority),
+      publishedDate: new Date(this.job.publishedDate),
+      deadlineDate: new Date(this.job.publishedDate),
+    };
+    this.form.patchValue(updatedJob);
+  }
+
+  createForm() {
+    this.form = this._fb.group({
+      name: [null, Validators.required],
+      description: [null, Validators.required],
+      publishedDate: [{value: new Date(), disabled: true}, Validators.required],
+      deadlineDate: [{value: null, disabled: true}, Validators.required],
+      position: [null, Validators.required],
+      seniority: [null, Validators.required],
+      companyId: [this.companyId, Validators.required],
+      technologies: [null, Validators.required],
+    });
+  }
+
+  addTechTag(tag: string){
+    return {value: tag, label: tag};
+  }
+}

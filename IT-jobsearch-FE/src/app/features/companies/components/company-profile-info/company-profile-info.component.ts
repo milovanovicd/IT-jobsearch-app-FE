@@ -49,9 +49,7 @@ export class CompanyProfileInfoComponent implements OnInit {
 
   initForm() {
     this.disableForm();
-    const { id, user, jobs, ...companyFormData } = this.company;
-    this.companyForm.setValue(companyFormData);
-    console.log(this.companyForm);
+    this.companyForm.patchValue(this.company);
   }
 
   toggleEdit() {
@@ -79,5 +77,10 @@ export class CompanyProfileInfoComponent implements OnInit {
 
   enableForm() {
     this.companyForm.enable();
+  }
+
+  onCancel(){
+    this.toggleEdit();
+    this.initForm();
   }
 }

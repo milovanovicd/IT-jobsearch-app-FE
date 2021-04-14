@@ -1,0 +1,29 @@
+:host {
+  .container {
+    width: 100%;
+
+
+    .actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 30px;
+
+      h1 {
+        margin-bottom: 0px;
+      }
+    }
+
+    .jobs {
+      table {
+        width: 100%;
+
+        th {
+          background-color: #0186f7;
+          font-size: 14px;
+          color: white;
+        }
+      }
+    }
+  }
+}
