@@ -1,3 +1,5 @@
+@import "../../../../shared/utilities/variables.scss";
+
 :host {
   .container {
     width: 100%;
@@ -19,7 +21,7 @@
         width: 100%;
 
         th {
-          background-color: #0186f7;
+          background-color: $blue-primary;
           font-size: 14px;
           color: white;
         }

@@ -1,3 +1,5 @@
+@import "../../utilities/variables.scss";
+
 :host {
   .example-spacer {
     flex: 1 1 auto;
@@ -28,7 +30,7 @@
       transition: 0.3s all;
 
       &.active, &:active, &:hover {
-        color: #0186f7;
+        color: $blue-primary;
       }
     }
   }

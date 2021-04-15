@@ -1,4 +1,4 @@
-
+@import "../../../../shared/utilities/variables.scss";
 
 :host {
 
@@ -23,12 +23,12 @@
         transition: 0.3s all;
 
         &.active{
-          background-color: #0186f7;
+          background-color: $blue-primary;
           color: #fff !important;
         }
 
         &:hover {
-          color: #0186f7;
+          color: $blue-primary;
         }
       }
 

@@ -2,13 +2,49 @@
   <div class="search-container">
     <div class="content">
       <h1>Find your job! You deserve it!</h1>
-      <div class="search-container">
+      <form>
         <div class="search-input">
           <input placeholder="Search..." type="text">
           <button class="search">Search</button>
         </div>
-        <div class="filters"></div>
-      </div>
+        <div class="filters">
+          <ng-select
+            class="search-filter"
+            [items]="positions"
+            bindLabel="label"
+            bindValue="value"
+            [multiple]="true"
+            placeholder="Select position"
+            clearAllText="Clear"
+            formControlName="position">
+          </ng-select>
+        <!-- Positions -->
+        <!-- Seniority -->
+          <ng-select
+            class="search-filter"
+            [items]="seniorities"
+            bindLabel="label"
+            bindValue="value"
+            [multiple]="true"
+            placeholder="Select seniority"
+            clearAllText="Clear"
+            formControlName="seniority">
+          </ng-select>
+        <!-- Seniority -->
+        <!-- Technologies -->
+          <ng-select
+            class="search-filter"
+            [items]="technologies"
+            bindLabel="label"
+            bindValue="value"
+            [multiple]="true"
+            placeholder="Technologies..."
+            clearAllText="Clear"
+            formControlName="technologies">
+          </ng-select>
+        </div>
+    <!-- Technologies -->
+      </form>
     </div>
   </div>
 </section>

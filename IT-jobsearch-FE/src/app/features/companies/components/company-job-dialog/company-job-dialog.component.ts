@@ -17,6 +17,7 @@ export class CompanyJobDialogComponent implements OnInit {
   form: FormGroup;
   companyId: any;
   isLoading = false;
+  minDate: any;
   positions = [];
   seniorities = [];
   technologies = [];
@@ -33,10 +34,14 @@ export class CompanyJobDialogComponent implements OnInit {
     this.companyId = this._credidentialsService.getCompany().id;
 
     this.createForm();
+
     if (!!this.job) {
       this.prepareForUpdate();
     }
+    this.minDate = this.form.getRawValue().publishedDate;
+
     this.fillOptions();
+
   }
 
   submit(){

@@ -33,7 +33,7 @@
     <!-- Deadline Date -->
     <mat-form-field class="form-field" appearance="outline">
       <mat-label>Deadline Date</mat-label>
-      <input matInput [matDatepicker]="deadlineDatePicker" formControlName="deadlineDate">
+      <input matInput [matDatepicker]="deadlineDatePicker" [min]="minDate" formControlName="deadlineDate">
       <mat-datepicker-toggle matSuffix [for]="deadlineDatePicker"></mat-datepicker-toggle>
       <mat-datepicker #deadlineDatePicker disabled="false"></mat-datepicker>
     </mat-form-field>
@@ -41,6 +41,8 @@
     <!-- Positions -->
     <div class="form-field">
       <ng-select
+        class="custom"
+        appearance = "outline"
         [items]="positions"
         bindLabel="label"
         bindValue="value"
@@ -56,6 +58,8 @@
     <!-- Seniority -->
     <div class="form-field">
       <ng-select
+        class="custom"
+        appearance = "outline"
         [items]="seniorities"
         bindLabel="label"
         bindValue="value"
@@ -69,6 +73,8 @@
     <!-- Technologies -->
     <div class="form-field">
       <ng-select
+        class="custom"
+        appearance = "outline"
         [items]="technologies"
         bindLabel="label"
         bindValue="value"

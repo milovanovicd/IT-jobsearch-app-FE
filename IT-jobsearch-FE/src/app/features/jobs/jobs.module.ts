@@ -6,10 +6,17 @@ import * as fromPages from './pages/index';
 import { RouterModule } from '@angular/router';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatButtonModule } from '@angular/material/button';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
   declarations: [...fromComponents.components, ...fromPages.pages],
-  imports: [CommonModule, RouterModule, MatProgressSpinnerModule, MatButtonModule],
+  imports: [
+    CommonModule,
+    RouterModule,
+    MatProgressSpinnerModule,
+    MatButtonModule,
+    NgSelectModule
+  ],
   providers: [JobsService],
   exports: [...fromComponents.components, ...fromPages.pages],
 })

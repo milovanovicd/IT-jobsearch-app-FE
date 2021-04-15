@@ -20,7 +20,11 @@ export class CompanyProfileJobsComponent implements OnInit {
   companyId: any;
   displayedColumns: string[] = ['name', 'publishedDate', 'deadlineDate', 'position', 'seniority', 'actions'];
 
-  constructor(public dialog: MatDialog, private _credidentialsService: CredentialsService, private _companiesService: CompaniesService, private _jobsService: JobsService) { }
+  constructor(
+    public dialog: MatDialog,
+    private _credidentialsService: CredentialsService,
+    private _companiesService: CompaniesService,
+    private _jobsService: JobsService) { }
 
   ngOnInit(): void {
     this.companyId = this._credidentialsService.getCompany().id;
