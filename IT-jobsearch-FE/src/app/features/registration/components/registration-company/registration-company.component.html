@@ -1,0 +1,39 @@
+<h1>Company registration</h1>
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
+  <mat-form-field class="form-field" appearance="legacy">
+    <mat-label>Name</mat-label>
+    <input matInput formControlName="name">
+  </mat-form-field>
+  <mat-form-field class="form-field" appearance="legacy">
+    <mat-label>Email</mat-label>
+    <input type="email" matInput formControlName="email">
+  </mat-form-field>
+  <mat-form-field class="form-field" appearance="legacy">
+    <mat-label>Location</mat-label>
+    <input matInput formControlName="location">
+  </mat-form-field>
+  <mat-form-field class="form-field" appearance="legacy">
+    <mat-label>Number Of Employees</mat-label>
+    <input min="0" type="number" matInput formControlName="noOfEmployees">
+  </mat-form-field>
+  <mat-form-field class="form-field" appearance="legacy">
+    <mat-label>Description</mat-label>
+    <textarea matInput formControlName="description"></textarea>
+  </mat-form-field>
+  <!-- Industry -->
+  <div class="form-field">
+    <ng-select
+      [items]="industries"
+      bindLabel="label"
+      bindValue="value"
+      [loading]="isLoading"
+      [multiple]="false"
+      placeholder="Select Industry"
+      clearAllText="Clear"
+      formControlName="industry"
+      addTagText="Add New"
+      [addTag]="addIndustryTag">
+    </ng-select>
+  </div>
+  <button type="submit" mat-raised-button color="primary">Submit</button>
+</form>

@@ -4,10 +4,9 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { finalize } from 'rxjs/operators';
 import { AuthService } from 'src/app/core/auth/auth.service';
-import { CredentialsService } from 'src/app/core/auth/credentials.service';
 import { untilDestroyed } from 'src/app/core/until-destroyed';
 
 @Component({
@@ -24,9 +23,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   constructor(
     private _fb: FormBuilder,
     private _authService: AuthService,
-    private credentialsService: CredentialsService,
     private _router: Router,
-    private _route: ActivatedRoute
   ) {
     this.createForm();
   }
@@ -39,10 +36,27 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.isSignUp = !this.isSignUp;
   }
 
-  // onLogin() {
-  //   this.isLoading = true;
-  //   const login$ = this._authService.login(this.loginForm.value);
-  // }
+  onRegister() {
+    this.isLoading = true;
+    const register$ = this._authService.register(this.loginForm.value);
+    register$
+    .pipe(
+      finalize(() => {
+        this.loginForm.markAsPristine();
+        this.isLoading = false;
+      }),
+      untilDestroyed(this)
+    )
+    .subscribe(
+      (response) => {
+        console.log('Registration successful: ', response);
+      },
+      (error) => {
+        this.error = error;
+      }
+    );
+
+  }
 
   onLogin() {
     this.isLoading = true;

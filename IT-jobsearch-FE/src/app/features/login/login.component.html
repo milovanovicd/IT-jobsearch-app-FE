@@ -2,7 +2,7 @@
   <div class="container">
     <h1>{{isSignUp ? "Sign Up As" : "Sign In"}}</h1>
     <div class="form-container">
-      <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+      <form [formGroup]="loginForm" (ngSubmit)="!isSignUp ? onLogin() : onRegister()">
         <mat-radio-group *ngIf="isSignUp" formControlName="accountType" class="radio-group" aria-label="Select an option">
           <mat-radio-button value="company">Company</mat-radio-button>
           <mat-radio-button value="candidate">Candidate</mat-radio-button>

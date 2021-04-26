@@ -1,0 +1,18 @@
+<section class="main">
+  <div class="container" *ngIf="!isLoading">
+    <ng-container *ngIf="isSuccessful">
+      <img class="check-mark" src="../../../../../assets/check.svg" alt="success">
+      <h1>Verification Successful!</h1>
+      <p>Please provide additional information to complete creation of your account</p>
+      <button mat-raised-button color="primary" (click)="onContinue()">Continue</button>
+   </ng-container>
+    <ng-container *ngIf="!isSuccessful">
+      <img class="check-mark" src="../../../../../assets/close.svg" alt="success">
+      <h1>Verification Failed!</h1>
+      <p>Token expired or invalid</p>
+      <button mat-raised-button color="primary" (click)="onSignup()">Signup again</button>
+   </ng-container>
+  </div>
+  <app-progress-spinner [displayProgressSpinner]="isLoading"></app-progress-spinner>
+</section>
+

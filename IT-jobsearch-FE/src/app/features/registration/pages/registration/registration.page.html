@@ -1,0 +1,15 @@
+<section class="main">
+  <div class="container" *ngIf="user && !isLoading">
+    <ng-container *ngIf="!isSuccess">
+      <app-registration-candidate [submittingObject]="submittingObject" *ngIf="hasCandidate" [user]="user"></app-registration-candidate>
+      <app-registration-company [submittingObject]="submittingObject" *ngIf="hasCompany" [user]="user"></app-registration-company>
+    </ng-container>
+    <div *ngIf="isSuccess" class="registration-success">
+      <h1>Registration successful</h1>
+      <p>You can now sign in to your account!</p>
+      <button mat-raised-button color="primary" (click)="navigateToLogin()">Login</button>
+    </div>
+  </div>
+  <app-progress-spinner [displayProgressSpinner]="isLoading"></app-progress-spinner>
+</section>
+

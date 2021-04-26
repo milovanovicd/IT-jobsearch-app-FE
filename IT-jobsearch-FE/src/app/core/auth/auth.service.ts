@@ -3,10 +3,10 @@ import { Observable, of, throwError } from 'rxjs';
 
 import { CredentialsService } from './credentials.service';
 import { HttpClient } from '@angular/common/http';
-import { map, catchError } from 'rxjs/operators';
+import { map, catchError, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
-import { Role } from './role.enum';
+import { UserDto } from 'src/app/shared/dto/user.dto';
 
 export interface LoginContext {
   email: string;
@@ -52,24 +52,36 @@ export class AuthService {
     );
   }
 
-  registerCustomer(email: string) {
-    return this.http.post(`${environment.apiURL}/accounts/register`, { email }).pipe(
-      map((res: any) => {
-        // If Admin is creating a new user, don't use new user's token
-        if (this.router.url.indexOf('admin-onboarding') === -1) {
-          this.credentialsService.setCredentials(
-            {
-              username: email,
-              token: res.token
-            },
-            true
-          );
-        }
+  /**
+   * Logs out the user and clear credentials.
+   * @param token Verification token.
+   * @return True if the user activated his account successfully.
+   */
+  confirmAccount(token: string) {
+    return this.http.get(`${environment.authURL}/confirm-account?token=${token}`);
+  }
 
-        return this.credentialsService.decodeToken(res.token).subject;
-      }),
-      catchError(err => of(false))
-    );
+  /**
+   * Gets user by id.
+   * @param id User id.
+   * @return True the UserDto.
+   */
+   getUserById(id: any): Observable<any> {
+    return this.http.get(`${environment.authURL}/users/${id}`);
+  }
+
+  /**
+   * Register the new user.
+   * @param context The register parameters.
+   */
+  register(context: LoginContext) {
+    const user = {
+      username: context.email,
+      password: context.password,
+      accountType: context.accountType
+    };
+
+    return this.http.post(`${environment.authURL}/register`, user).pipe(tap(response => console.log(response)));
   }
 
   /**

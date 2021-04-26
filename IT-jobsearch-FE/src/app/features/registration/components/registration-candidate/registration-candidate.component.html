@@ -1,0 +1,20 @@
+<h1>Candidate registration</h1>
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
+  <mat-form-field class="form-field" appearance="legacy">
+    <mat-label>Full Name</mat-label>
+    <input matInput formControlName="fullName">
+  </mat-form-field>
+  <mat-form-field class="form-field" appearance="legacy">
+    <mat-label>Email</mat-label>
+    <input type="email" matInput formControlName="email">
+  </mat-form-field>
+  <mat-form-field class="form-field" appearance="legacy">
+    <mat-label>Address</mat-label>
+    <input matInput formControlName="address">
+  </mat-form-field>
+  <mat-form-field class="form-field" appearance="legacy">
+    <mat-label>Age</mat-label>
+    <input min="0" type="number" matInput formControlName="age">
+  </mat-form-field>
+  <button type="submit" mat-raised-button color="primary">Submit</button>
+</form>

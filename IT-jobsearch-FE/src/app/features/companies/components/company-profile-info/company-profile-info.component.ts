@@ -42,8 +42,8 @@ export class CompanyProfileInfoComponent implements OnInit {
       name: ['', [Validators.required]],
       description: ['', [Validators.required]],
       location: ['', Validators.required],
-      noOfEmployees: ['', Validators.required],
-      industry: [[], Validators.required],
+      noOfEmployees: ['', [Validators.required, Validators.min(0)]],
+      industry: ['', Validators.required],
     });
   }
 

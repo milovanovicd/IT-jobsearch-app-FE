@@ -4,8 +4,8 @@ import { HomeComponent } from './home/home.component';
 import { JobsModule } from './jobs/jobs.module';
 import { LoginModule } from './login/login.module';
 import { CompaniesModule } from './companies/companies.module';
-
-
+import { RegistrationModule } from './registration/registration.module';
+import { CandidatesModule } from './candidates/candidates.module';
 
 @NgModule({
   declarations: [HomeComponent],
@@ -13,7 +13,9 @@ import { CompaniesModule } from './companies/companies.module';
     CommonModule,
     JobsModule,
     LoginModule,
-    CompaniesModule
-  ]
+    RegistrationModule,
+    CompaniesModule,
+    CandidatesModule
+  ],
 })
-export class FeaturesModule { }
+export class FeaturesModule {}

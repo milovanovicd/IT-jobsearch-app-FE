@@ -33,7 +33,7 @@
     <!-- No. of Employees -->
     <mat-form-field class="form-field width-50" appearance="outline">
       <mat-label>No. of Employees</mat-label>
-      <input matInput placeholder="No. Of Employees" formControlName="noOfEmployees" required>
+      <input min="0" type="number" matInput placeholder="No. Of Employees" formControlName="noOfEmployees" required>
       <mat-error *ngIf="companyForm.controls.noOfEmployees.touched && companyForm.controls.noOfEmployees.invalid">
         <span *ngIf="companyForm.controls.noOfEmployees.errors.required">This field is required.</span>
       </mat-error>
