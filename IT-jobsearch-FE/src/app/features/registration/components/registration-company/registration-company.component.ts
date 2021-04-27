@@ -1,7 +1,7 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { take } from 'rxjs/operators';
-import { CompaniesService } from 'src/app/features/companies/companies.service';
+import { AuthService } from 'src/app/core/auth/auth.service';
 import { CreateCompanyDto } from 'src/app/shared/dto/createCompany.dto';
 import { UserDto } from 'src/app/shared/dto/user.dto';
 import { MetadataService } from 'src/app/shared/services/metadata.service';
@@ -22,7 +22,7 @@ export class RegistrationCompanyComponent implements OnInit {
   constructor(
     private _fb: FormBuilder,
     private _metadataService: MetadataService,
-    private _companyService: CompaniesService
+    private _authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -59,7 +59,7 @@ export class RegistrationCompanyComponent implements OnInit {
     console.log(this.form.getRawValue());
     const company = this.prepareFieldsForCreate(this.form.value);
     this.submittingObject.isLoading = true;
-    this._companyService.update(this.user.company.id, company).pipe(take(1)).subscribe((response) => {
+    this._authService.registerCompany(this.user.company.id, company).pipe(take(1)).subscribe((response) => {
       this.submittingObject.isLoading = false;
       this.submittingObject.isSuccess = true;
       console.log('Updated company', response);

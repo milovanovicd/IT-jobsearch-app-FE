@@ -7,6 +7,8 @@ import { map, catchError, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { UserDto } from 'src/app/shared/dto/user.dto';
+import { CreateCandidateDto } from 'src/app/shared/dto/createCandidate.dto';
+import { CreateCompanyDto } from 'src/app/shared/dto/createCompany.dto';
 
 export interface LoginContext {
   email: string;
@@ -82,6 +84,14 @@ export class AuthService {
     };
 
     return this.http.post(`${environment.authURL}/register`, user).pipe(tap(response => console.log(response)));
+  }
+
+  registerCandidate(id: any, data: CreateCandidateDto): Observable<any> {
+    return this.http.put(`${environment.authURL}/register-candidate/${id}`, data);
+  }
+
+  registerCompany(id: any, data: CreateCompanyDto): Observable<any> {
+    return this.http.put(`${environment.authURL}/register-company/${id}`, data);
   }
 
   /**

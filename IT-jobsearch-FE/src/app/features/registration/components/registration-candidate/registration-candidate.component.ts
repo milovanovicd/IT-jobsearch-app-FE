@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { take } from 'rxjs/operators';
-import { CandidatesService } from 'src/app/features/candidates/candidates.service';
+import { AuthService } from 'src/app/core/auth/auth.service';
 import { CreateCandidateDto } from 'src/app/shared/dto/createCandidate.dto';
 import { UserDto } from 'src/app/shared/dto/user.dto';
 
@@ -17,7 +17,7 @@ export class RegistrationCandidateComponent implements OnInit {
 
   form: FormGroup;
 
-  constructor(private _fb: FormBuilder, private _candidatesService: CandidatesService) {}
+  constructor(private _fb: FormBuilder, private _authService: AuthService) {}
 
   ngOnInit(): void {
     this.initForm();
@@ -37,7 +37,7 @@ export class RegistrationCandidateComponent implements OnInit {
     console.log(this.form.getRawValue());
     const candidate = this.prepareFieldsForCreate(this.form.value);
     this.submittingObject.isLoading = true;
-    this._candidatesService.update(this.user.candidate.id, candidate).pipe(take(1)).subscribe((response) => {
+    this._authService.registerCandidate(this.user.candidate.id, candidate).pipe(take(1)).subscribe((response) => {
       console.log(response);
       this.submittingObject.isLoading = false;
       this.submittingObject.isSuccess = true;
