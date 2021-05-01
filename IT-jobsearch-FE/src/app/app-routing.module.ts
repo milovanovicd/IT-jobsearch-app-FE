@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { CandidateProfileInfoComponent, CandidateProfileJobsComponent, CandidateProfileResumeComponent } from './features/candidates/components';
+import { CandidateProfilePageComponent } from './features/candidates/pages';
 import {
   CompanyProfileApplicationsComponent,
   CompanyProfileInfoComponent,
@@ -63,6 +65,16 @@ const routes: Routes = [
       { path: 'profile', component: CompanyProfileInfoComponent },
       { path: 'jobs', component: CompanyProfileJobsComponent },
       { path: 'applications', component: CompanyProfileApplicationsComponent },
+    ],
+  },
+  {
+    path: 'candidate-profile',
+    component: CandidateProfilePageComponent,
+    children: [
+      { path: '', redirectTo: 'profile', pathMatch: 'full' },
+      { path: 'profile', component: CandidateProfileInfoComponent },
+      { path: 'jobs', component: CandidateProfileJobsComponent },
+      { path: 'resume', component: CandidateProfileResumeComponent },
     ],
   },
   // Fallback when no prior route is matched

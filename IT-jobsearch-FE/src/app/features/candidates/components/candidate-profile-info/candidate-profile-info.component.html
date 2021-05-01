@@ -1,0 +1,40 @@
+
+
+<div class="form-container">
+  <h1>Candidate Profile</h1>
+  <form *ngIf="candidateForm" [formGroup]="candidateForm" (submit)="onUpdate()">
+    <!-- Full Name -->
+    <mat-form-field class="form-field" appearance="outline">
+      <mat-label>Full Name</mat-label>
+      <input matInput placeholder="Full Name" formControlName="fullName" required>
+      <mat-error *ngIf="candidateForm.controls.fullName.touched && candidateForm.controls.fullName.invalid">
+        <span *ngIf="candidateForm.controls.fullName.errors.required">This field is required.</span>
+      </mat-error>
+    </mat-form-field>
+    <!-- Full Name -->
+    <!-- Address -->
+    <mat-form-field class="form-field width-50" appearance="outline">
+      <mat-label>Address</mat-label>
+      <input matInput placeholder="Address" formControlName="address" required>
+      <mat-error *ngIf="candidateForm.controls.address.touched && candidateForm.controls.address.invalid">
+        <span *ngIf="candidateForm.controls.address.errors.required">This field is required.</span>
+      </mat-error>
+    </mat-form-field>
+    <!-- Address -->
+    <!-- Age -->
+    <mat-form-field class="form-field width-50" appearance="outline">
+      <mat-label>Age</mat-label>
+      <input min="0" type="number" matInput placeholder="Age" formControlName="age" required>
+      <mat-error *ngIf="candidateForm.controls.age.touched && candidateForm.controls.age.invalid">
+        <span *ngIf="candidateForm.controls.age.errors.required">This field is required.</span>
+      </mat-error>
+    </mat-form-field>
+    <!-- Age -->
+    <div class="form-buttons">
+      <button *ngIf='isEditable' mat-raised-button color="primary" type="submit">Save</button>
+      <button *ngIf='isEditable' mat-raised-button color="warn" (click)='onCancel()'>Cancel</button>
+      <button *ngIf='!isEditable' mat-raised-button color="primary" (click)='toggleEdit()'>Edit</button>
+    </div>
+  </form>
+</div>
+<app-progress-spinner [displayProgressSpinner]="isLoading"></app-progress-spinner>

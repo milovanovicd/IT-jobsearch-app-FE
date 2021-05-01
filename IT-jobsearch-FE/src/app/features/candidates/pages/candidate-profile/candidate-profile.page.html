@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="sidenav">
+    <mat-nav-list>
+      <mat-list>
+        <mat-list-item
+          style="cursor: pointer"
+          routerLink="/candidate-profile/profile"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{exact:true}"
+          >Profile</mat-list-item>
+        <mat-list-item
+          style="cursor: pointer"
+          routerLink="/candidate-profile/jobs"
+          routerLinkActive="active"
+          >Jobs</mat-list-item>
+        <mat-list-item
+          style="cursor: pointer"
+          routerLink="/candidate-profile/resume"
+          routerLinkActive="active"
+          >Resume</mat-list-item>
+      </mat-list>
+    </mat-nav-list>
+  </div>
+  <div class="content">
+    <router-outlet></router-outlet>
+  </div>
+</div>

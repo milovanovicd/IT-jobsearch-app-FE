@@ -41,4 +41,12 @@ export class HeaderComponent implements OnInit {
   onPostedJobs() {
     this._router.navigate(['/company-profile/jobs']);
   }
+
+  onCandidateProfile() {
+    this._router.navigate(['/candidate-profile']);
+  }
+
+  onAppliedJobs() {
+    this._router.navigate(['/candidate-profile/jobs']);
+  }
 }

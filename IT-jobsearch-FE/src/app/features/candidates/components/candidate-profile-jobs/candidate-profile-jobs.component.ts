@@ -3,36 +3,36 @@ import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import { CredentialsService } from 'src/app/core/auth/credentials.service';
+import { CompanyJobDialogComponent } from 'src/app/features/companies/components';
 import { JobsService } from 'src/app/features/jobs/jobs.service';
 import { ConfirmationDialogComponent } from 'src/app/shared/components';
 import { CompanyJobDto } from 'src/app/shared/dto/companyJob.dto';
-import { CompaniesService } from '../../companies.service';
-import { CompanyJobDialogComponent } from '../company-job-dialog/company-job-dialog.component';
+import { CandidatesService } from '../../candidates.service';
 
 @Component({
-  selector: 'app-company-profile-jobs',
-  templateUrl: './company-profile-jobs.component.html',
-  styleUrls: ['./company-profile-jobs.component.scss']
+  selector: 'app-candidate-profile-jobs',
+  templateUrl: './candidate-profile-jobs.component.html',
+  styleUrls: ['./candidate-profile-jobs.component.scss']
 })
-export class CompanyProfileJobsComponent implements OnInit {
+export class CandidateProfileJobsComponent implements OnInit {
   jobs$: Observable<CompanyJobDto>;
   isLoading = false;
-  companyId: any;
+  candidateId: any;
   displayedColumns: string[] = ['name', 'publishedDate', 'deadlineDate', 'position', 'seniority', 'actions'];
 
   constructor(
     public dialog: MatDialog,
     private _credidentialsService: CredentialsService,
-    private _companiesService: CompaniesService,
+    private _candidatesService: CandidatesService,
     private _jobsService: JobsService) { }
 
   ngOnInit(): void {
-    this.companyId = this._credidentialsService.getCompany().id;
+    this.candidateId = this._credidentialsService.getCompany().id;
     this.jobs$ = this.fetchCompanyJobs();
   }
 
   fetchCompanyJobs(): Observable<any> {
-    return this._companiesService.get(this.companyId).pipe(take(1), map(company => company.jobs));
+    return this._candidatesService.get(this.candidateId).pipe(take(1), map(company => company.jobs));
   }
 
   openCreateDialog() {

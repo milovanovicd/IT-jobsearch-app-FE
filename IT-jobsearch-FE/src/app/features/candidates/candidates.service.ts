@@ -21,4 +21,12 @@ export class CandidatesService {
   remove(id: any) {
     return this._http.delete(`${environment.apiURL}${this.path}/${id}`);
   }
+
+  uploadResume(formData: FormData) {
+    return this._http.post(`${environment.apiURL}/resume/upload`, formData);
+  }
+
+  removeResume(id: any) {
+    return this._http.put(`${environment.apiURL}/resume/remove/${id}`, null);
+  }
 }
