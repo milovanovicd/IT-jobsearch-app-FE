@@ -22,6 +22,6 @@
 
   <div class="job-description">
     <h2>Jobs</h2>
-    <app-jobs-list [companyJobs]="company.jobs"></app-jobs-list>
+    <app-jobs-list [companyJobs]="company.jobs.slice(0,4)"></app-jobs-list>
   </div>
 </section>

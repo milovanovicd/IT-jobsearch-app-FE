@@ -1,15 +1,11 @@
-
-
 <div class="container">
   <h1>My Resume</h1>
-  <ng-container *ngIf="!candidateHasResume()">
-    <input #resumeInput hidden="true" type="file" accept="application/msword, text/plain, application/pdf"
-      onclick="this.value=null" (change)="resumeInputChange($event)"/>
-    <button mat-flat-button color="primary" (click)="resumeInput.click()">Upload Resume</button>
-  </ng-container>
-  <ng-container *ngIf="candidateHasResume()">
-    <a [href]="resume" mat-button mat-flat-button color="primary">Download Resume</a>
-    <button mat-flat-button color="warn" (click)="removeResume()">Remove Resume</button>
-  </ng-container>
+  <app-resume-upload
+    (loading)="onLoadingChange($event)"
+    (resumeValueChanged)="onResumeValueChanged($event)"
+    [resume]="resume"
+  ></app-resume-upload>
 </div>
-<app-progress-spinner [displayProgressSpinner]="isLoading"></app-progress-spinner>
+<app-progress-spinner
+  [displayProgressSpinner]="isLoading"
+></app-progress-spinner>

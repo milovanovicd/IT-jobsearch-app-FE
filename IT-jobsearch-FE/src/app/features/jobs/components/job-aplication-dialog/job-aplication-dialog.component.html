@@ -1,0 +1,42 @@
+<div mat-dialog-title>
+  Job Application
+</div>
+<div class="container">
+  <mat-dialog-content>
+    <ng-container *ngIf="!isSuccessful">
+      <div class="job-details">
+        <h3>{{ data.job.name }}</h3>
+        <p>{{ data.job.company.name }}</p>
+      </div>
+      <div class="resume-check">
+        <p>{{ !!resume ? "Check your resume before you apply" : "UPLOAD your resume before you apply"}}</p>
+        <app-resume-upload
+          (loading)="onLoadingChange($event)"
+          (resumeValueChanged)="onResumeValueChanged($event)"
+          [resume]="resume"
+        ></app-resume-upload>
+      </div>
+        <div>
+          <p>Are you sure you want to apply?</p>
+          <button class="btn-action btn-apply" [disabled]="!!!resume" mat-raised-button color="primary" (click)="onApply()">
+            Apply
+          </button>
+          <button class="btn-action"  mat-raised-button color="warn" mat-dialog-close>
+            Cancel
+          </button>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="isSuccessful && !isLoading">
+      <img
+        class="check-mark"
+        src="../../../../../assets/check.svg"
+        alt="success"
+      />
+      <h1>Application Successful!</h1>
+      <button mat-raised-button color="primary" [mat-dialog-close]="true">Ok</button>
+    </ng-container>
+  </mat-dialog-content>
+</div>
+<app-progress-spinner
+  [displayProgressSpinner]="isLoading"
+></app-progress-spinner>

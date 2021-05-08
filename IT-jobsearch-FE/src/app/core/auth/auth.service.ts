@@ -3,10 +3,9 @@ import { Observable, of, throwError } from 'rxjs';
 
 import { CredentialsService } from './credentials.service';
 import { HttpClient } from '@angular/common/http';
-import { map, catchError, tap } from 'rxjs/operators';
+import { catchError, switchMap, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
-import { UserDto } from 'src/app/shared/dto/user.dto';
 import { CreateCandidateDto } from 'src/app/shared/dto/createCandidate.dto';
 import { CreateCompanyDto } from 'src/app/shared/dto/createCompany.dto';
 
@@ -37,7 +36,7 @@ export class AuthService {
     };
 
     return this.http.post(`${environment.authURL}/signin`, user).pipe(
-      map((res: any) => {
+      tap((res: any) => {
         console.log(this.credentialsService.decodeToken(res.token));
         this.credentialsService.setCredentials(
           {
@@ -48,7 +47,7 @@ export class AuthService {
           },
           context.remember,
         );
-        return true;
+        return of(res);
       }),
       catchError(err => throwError(err))
     );
@@ -101,8 +100,7 @@ export class AuthService {
   logout(): Observable<boolean> {
     // Customize credentials invalidation here
     this.credentialsService.setCredentials();
-    this.credentialsService.setCompany();
-    this.credentialsService.setCandidate();
+    this.credentialsService.setAppliedJobs();
     return of(true);
   }
 

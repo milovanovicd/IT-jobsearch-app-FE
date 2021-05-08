@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
-import { JobsService } from '../../jobs.service';
+import { JobsService } from '../../services/jobs.service';
 
 @Component({
   selector: 'app-jobs-list',
@@ -18,8 +18,8 @@ export class JobsListComponent implements OnInit {
   constructor(private _jobsService:JobsService, private _router: Router) { }
 
   ngOnInit() {
-    this.jobs$ = this._jobsService.getAll().pipe(take(1))
-   }
+    this.jobs$ = this._jobsService.getAll();
+  }
 
   details(id){
     this._router.navigate(['jobs/'+id]);

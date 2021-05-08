@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import { CredentialsService } from 'src/app/core/auth/credentials.service';
-import { JobsService } from 'src/app/features/jobs/jobs.service';
+import { JobsService } from 'src/app/features/jobs/services/jobs.service';
 import { ConfirmationDialogComponent } from 'src/app/shared/components';
 import { CompanyJobDto } from 'src/app/shared/dto/companyJob.dto';
 import { CompaniesService } from '../../companies.service';

@@ -88,11 +88,14 @@
   .job-description {
     margin-bottom: 30px;
   }
-
-  .apply-button {
-    width: 100%;
-    font-size: 20px;
+  .apply-button-container {
     margin-bottom: 50px;
-    padding: 5px 5px;
+
+    .apply-button {
+      width: 100%;
+      margin-bottom: 20px;
+      font-size: 20px;
+      padding: 5px 5px;
+    }
   }
 }

@@ -9,6 +9,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { ProgressSpinnerModule } from 'src/app/shared/components/progress-spinner/progress-spinner.module';
 import { JobsModule } from '../jobs/jobs.module';
 import { MaterialModule } from 'src/app/material.module';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   declarations: [...fromPages.pages, ...fromComponents.components],
@@ -19,7 +20,8 @@ import { MaterialModule } from 'src/app/material.module';
     ReactiveFormsModule,
     RouterModule,
     ProgressSpinnerModule,
-    NgSelectModule
+    NgSelectModule,
+    SharedModule
   ],
   providers: [CandidatesService],
   exports: [...fromPages.pages, ...fromComponents.components]

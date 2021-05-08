@@ -23,8 +23,7 @@ export interface UserCompany {
 const jwtHelper = new JwtHelperService();
 
 const credentialsKey = 'credentials';
-const companyKey = 'company';
-const candidateKey = 'candidate';
+const jobApplicationsKey = 'jobApplications';
 
 /**
  * Provides storage for authentication credentials.
@@ -110,23 +109,13 @@ export class CredentialsService {
     }
   }
 
-  setCompany(company?: CompanyDto){
-    const companyToAdd = company || null;
+  setAppliedJobs(jobApplications?: CompanyDto){
+    const jobApplicationsToAdd = jobApplications || null;
 
-    if (company) {
-      localStorage.setItem(companyKey, JSON.stringify(companyToAdd));
+    if (jobApplicationsToAdd) {
+      localStorage.setItem(jobApplicationsKey, JSON.stringify(jobApplicationsToAdd));
     } else {
-      localStorage.removeItem(companyKey);
-    }
-  }
-
-  setCandidate(candidate?: any){
-    const candidateToAdd = candidate || null;
-
-    if (candidate) {
-      localStorage.setItem(candidateKey, JSON.stringify(candidateToAdd));
-    } else {
-      localStorage.removeItem(candidateKey);
+      localStorage.removeItem(jobApplicationsKey);
     }
   }
 

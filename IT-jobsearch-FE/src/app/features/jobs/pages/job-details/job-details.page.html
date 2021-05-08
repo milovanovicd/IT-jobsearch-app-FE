@@ -35,17 +35,21 @@
     <h2>Description</h2>
     <p>{{job.description}}</p>
   </div>
-  <button
-    mat-flat-button
-    color="primary"
-    class="apply-button"
-    (click)="onApplyJob(job.id)"
-    [disabled] = "!isCandidate()"
-  >
-    Apply Now
-  </button>
+  <div class="apply-button-container">
+    <button
+      mat-flat-button
+      color="primary"
+      class="apply-button"
+      (click)="onApplyJob(job)"
+      [disabled] = "!isCandidate() || isApplied"
+    >
+      Apply Now
+    </button>
+    <p style="text-align: center;" *ngIf="!isCandidate()">Only candidates can apply for jobs</p>
+    <p style="text-align: center;" *ngIf="isApplied">You already applied! Check your profile!</p>
+  </div>
   <div class="job-description">
     <h2>Similar jobs</h2>
-    <p>Similar jobs here</p>
+    <app-jobs-list [companyJobs]="job.company.jobs.slice(0,4)"></app-jobs-list>
   </div>
 </section>

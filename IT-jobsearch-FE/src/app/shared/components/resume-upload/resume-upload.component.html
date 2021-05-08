@@ -1,0 +1,9 @@
+<ng-container *ngIf="!candidateHasResume()">
+  <input #resumeInput hidden="true" type="file" accept="application/msword, text/plain, application/pdf"
+    onclick="this.value=null" (change)="resumeInputChange($event)"/>
+  <button mat-flat-button color="primary" (click)="resumeInput.click()">Upload Resume</button>
+</ng-container>
+<ng-container *ngIf="candidateHasResume()">
+  <a [href]="resume" *ngIf="showDownloadButton" mat-button mat-flat-button color="primary">Download Resume</a>
+  <button mat-flat-button color="warn" (click)="removeResume()">Remove Resume</button>
+</ng-container>

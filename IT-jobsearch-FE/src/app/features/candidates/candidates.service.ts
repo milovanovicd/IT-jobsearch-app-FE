@@ -1,14 +1,17 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
+import { CredentialsService } from 'src/app/core/auth/credentials.service';
 import { CreateCandidateDto } from 'src/app/shared/dto/createCandidate.dto';
+import { JobApplicationDto } from 'src/app/shared/dto/jobApplication.dto';
 import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class CandidatesService {
   path = '/candidates';
 
-  constructor(private _http: HttpClient) {}
+  constructor(private _http: HttpClient, private credentialsService: CredentialsService) {}
 
   get(id: any): Observable<any> {
     return this._http.get(`${environment.apiURL}${this.path}/${id}`);
@@ -28,5 +31,12 @@ export class CandidatesService {
 
   removeResume(id: any) {
     return this._http.put(`${environment.apiURL}/resume/remove/${id}`, null);
+  }
+
+  updateAppliedJobs(id: any) {
+    return this.get(id).pipe(tap(({jobApplications}) => {
+      const appliedJobs = jobApplications.map((item: JobApplicationDto) => item.job.id);
+      this.credentialsService.setAppliedJobs(appliedJobs);
+    }));
   }
 }

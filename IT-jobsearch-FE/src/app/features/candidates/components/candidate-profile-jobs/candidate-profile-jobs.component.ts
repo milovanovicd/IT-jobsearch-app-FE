@@ -1,100 +1,82 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Observable } from 'rxjs';
-import { map, take } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { map, switchMap, take } from 'rxjs/operators';
 import { CredentialsService } from 'src/app/core/auth/credentials.service';
-import { CompanyJobDialogComponent } from 'src/app/features/companies/components';
-import { JobsService } from 'src/app/features/jobs/jobs.service';
+import { JobApplicationsService } from 'src/app/features/jobs/services/job-applications.service';
 import { ConfirmationDialogComponent } from 'src/app/shared/components';
-import { CompanyJobDto } from 'src/app/shared/dto/companyJob.dto';
+import { JobApplicationDto } from 'src/app/shared/dto/jobApplication.dto';
 import { CandidatesService } from '../../candidates.service';
 
 @Component({
   selector: 'app-candidate-profile-jobs',
   templateUrl: './candidate-profile-jobs.component.html',
-  styleUrls: ['./candidate-profile-jobs.component.scss']
+  styleUrls: ['./candidate-profile-jobs.component.scss'],
 })
 export class CandidateProfileJobsComponent implements OnInit {
-  jobs$: Observable<CompanyJobDto>;
+  jobAplications$: Observable<JobApplicationDto>;
   isLoading = false;
   candidateId: any;
-  displayedColumns: string[] = ['name', 'publishedDate', 'deadlineDate', 'position', 'seniority', 'actions'];
+  displayedColumns: string[] = [
+    'name',
+    'appliedDate',
+    'company',
+    'position',
+    'actions',
+  ];
 
   constructor(
     public dialog: MatDialog,
     private _credidentialsService: CredentialsService,
     private _candidatesService: CandidatesService,
-    private _jobsService: JobsService) { }
+    private _jobApplicationsService: JobApplicationsService
+  ) {}
 
   ngOnInit(): void {
-    this.candidateId = this._credidentialsService.getCompany().id;
-    this.jobs$ = this.fetchCompanyJobs();
+    this.candidateId = this._credidentialsService.getCandidate().id;
+    this.jobAplications$ = this.fetchApplications();
   }
 
-  fetchCompanyJobs(): Observable<any> {
-    return this._candidatesService.get(this.candidateId).pipe(take(1), map(company => company.jobs));
+  fetchApplications(): Observable<JobApplicationDto> {
+    return this._candidatesService.get(this.candidateId).pipe(
+      take(1),
+      map((candidate) => candidate.jobApplications)
+    );
   }
 
-  openCreateDialog() {
-    const dialogRef = this.dialog.open(CompanyJobDialogComponent, {
-      width: '600px',
-      disableClose: true
-    });
+  onDelete(jobApplication: JobApplicationDto) {
+    console.log(jobApplication.job.id, this.candidateId);
 
-    dialogRef
-    .afterClosed()
-    .pipe(take(1))
-    .subscribe(result => {
-      if (result) {
-        this.isLoading = true;
-        this._jobsService.create(result).pipe(take(1)).subscribe((createdJob) => {
-          this.jobs$ = this.fetchCompanyJobs();
-          this.isLoading = false;
-        });
-      }
-    });
-  }
-
-  openUpdateDialog(job?: any) {
-    const dialogRef = this.dialog.open(CompanyJobDialogComponent, {
-      data : job,
-      width: '600px',
-      disableClose: true
-    });
-
-    dialogRef
-    .afterClosed()
-    .pipe(take(1))
-    .subscribe(result => {
-      if (result) {
-        this.isLoading = true;
-        this._jobsService.update(job.id, result).pipe(take(1)).subscribe((updatedJob) => {
-          this.jobs$ = this.fetchCompanyJobs();
-          this.isLoading = false;
-        });
-      }
-    });
-  }
-
-  onDelete(job) {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
-      data: 'Are you sure you want to delete this job?',
+      data: 'Are you sure you want to delete this job application?',
       width: '400px',
-      disableClose: true
+      disableClose: true,
     });
 
     dialogRef
-    .afterClosed()
-    .pipe(take(1))
-    .subscribe(result => {
-      if (result) {
-        this.isLoading = true;
-        this._jobsService.remove(job.id).pipe(take(1)).subscribe(_ => {
-          this.jobs$ = this.fetchCompanyJobs();
-          this.isLoading = false;
-        });
-      }
-    });
+      .afterClosed()
+      .pipe(
+        switchMap((result) => {
+          if (result) {
+            this.isLoading = true;
+            return this._jobApplicationsService.remove(
+              jobApplication.job.id,
+              this.candidateId
+            );
+          }
+        }),
+        switchMap(() => {
+            this.jobAplications$ = this.fetchApplications();
+            const { id } = this._credidentialsService.getCandidate();
+            this.isLoading = false;
+            return this._candidatesService.updateAppliedJobs(id);
+        }),
+        take(1)
+      )
+      .subscribe();
   }
 
+  details(jobApplication: JobApplicationDto) {
+    console.log(jobApplication);
+  }
 }
