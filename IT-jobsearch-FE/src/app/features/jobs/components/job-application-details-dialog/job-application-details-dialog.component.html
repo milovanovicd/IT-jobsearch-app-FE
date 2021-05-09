@@ -1,0 +1,32 @@
+<div mat-dialog-title>
+  Job Application Details
+</div>
+<mat-dialog-content>
+  <div class="job-container">
+    <div class="header">
+      <a mat-dialog-close [routerLink]="'/companies/'+ data.job.company.id" class="company">{{data.job.company.name}}</a>
+    </div>
+    <div class="main"><a mat-dialog-close [routerLink]="'/jobs/'+ data.job.id" class="title">{{data.job.name}}</a></div>
+  </div>
+  <div class="job-info">
+    <div class="info-item">
+      <p class="info-title">Seniority</p>
+      <p class="info-description">{{data.job.seniority}}</p>
+    </div>
+    <div class="info-item">
+      <p class="info-title">Published</p>
+      <p class="info-description">{{data.job.publishedDate | date}}</p>
+    </div>
+    <div class="info-item">
+      <p class="info-title">Deadline</p>
+      <p class="info-description">{{data.job.deadlineDate | date}}</p>
+    </div>
+    <div class="info-item">
+      <p class="info-title">Applied On</p>
+      <p class="info-description">{{data.createdOn | date}}</p>
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-raised-button mat-dialog-close color="warn">Close</button>
+</mat-dialog-actions>

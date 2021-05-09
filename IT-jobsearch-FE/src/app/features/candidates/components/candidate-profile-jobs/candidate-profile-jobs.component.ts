@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Observable, of } from 'rxjs';
 import { map, switchMap, take } from 'rxjs/operators';
 import { CredentialsService } from 'src/app/core/auth/credentials.service';
+import { JobApplicationDetailsDialogComponent } from 'src/app/features/jobs/components';
 import { JobApplicationsService } from 'src/app/features/jobs/services/job-applications.service';
 import { ConfirmationDialogComponent } from 'src/app/shared/components';
 import { JobApplicationDto } from 'src/app/shared/dto/jobApplication.dto';
@@ -45,8 +46,6 @@ export class CandidateProfileJobsComponent implements OnInit {
   }
 
   onDelete(jobApplication: JobApplicationDto) {
-    console.log(jobApplication.job.id, this.candidateId);
-
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       data: 'Are you sure you want to delete this job application?',
       width: '400px',
@@ -77,6 +76,10 @@ export class CandidateProfileJobsComponent implements OnInit {
   }
 
   details(jobApplication: JobApplicationDto) {
-    console.log(jobApplication);
+    this.dialog.open(JobApplicationDetailsDialogComponent, {
+      data: jobApplication,
+      width: '500px',
+      disableClose: true,
+    });
   }
 }

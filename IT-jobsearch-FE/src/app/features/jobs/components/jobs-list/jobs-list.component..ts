@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { take } from 'rxjs/operators';
 import { JobsService } from '../../services/jobs.service';
 
 @Component({
@@ -15,7 +14,10 @@ export class JobsListComponent implements OnInit {
   isLoading = false;
   jobs$: Observable<any[]>
 
-  constructor(private _jobsService:JobsService, private _router: Router) { }
+  constructor(private _jobsService:JobsService, private _router: Router) {
+    // override the route reuse strategy
+    this._router.routeReuseStrategy.shouldReuseRoute = () => false;
+   }
 
   ngOnInit() {
     this.jobs$ = this._jobsService.getAll();
