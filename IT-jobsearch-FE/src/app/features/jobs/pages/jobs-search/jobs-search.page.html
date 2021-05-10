@@ -2,39 +2,42 @@
   <div class="search-container">
     <div class="content">
       <h1>Find your job! You deserve it!</h1>
-      <form>
+      <form [formGroup] = "form">
         <div class="search-input">
-          <input placeholder="Search..." type="text">
+          <input formControlName="name" placeholder="Search..." type="text">
           <button class="search">Search</button>
         </div>
         <div class="filters">
           <ng-select
             class="search-filter"
             [items]="positions"
+            (change) = "filter()"
             bindLabel="label"
             bindValue="value"
             [multiple]="true"
             placeholder="Select position"
             clearAllText="Clear"
-            formControlName="position">
+            formControlName="positions">
           </ng-select>
         <!-- Positions -->
         <!-- Seniority -->
           <ng-select
             class="search-filter"
             [items]="seniorities"
+            (change) = "filter()"
             bindLabel="label"
             bindValue="value"
             [multiple]="true"
             placeholder="Select seniority"
             clearAllText="Clear"
-            formControlName="seniority">
+            formControlName="seniorities">
           </ng-select>
         <!-- Seniority -->
         <!-- Technologies -->
           <ng-select
             class="search-filter"
             [items]="technologies"
+            (change) = "filter()"
             bindLabel="label"
             bindValue="value"
             [multiple]="true"
@@ -50,7 +53,8 @@
 </section>
 <section>
   <div class="jobs-list">
-    <app-jobs-list></app-jobs-list>
+    <app-jobs-list *ngIf="!!jobs && jobs.length > 0" [externalJobs]="true" [companyJobs]="jobs"></app-jobs-list>
+    <p *ngIf="!!jobs && jobs.length === 0" style="text-align: center;">No results, try again</p>
   </div>
 </section>
-
+<app-progress-spinner [displayProgressSpinner]="isLoading"></app-progress-spinner>

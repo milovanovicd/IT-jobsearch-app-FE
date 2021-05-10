@@ -35,7 +35,7 @@ export class JobDetailsPageComponent implements OnInit {
       .pipe(tap((_) => (this.isLoading = false)));
 
     // Check if candidate has already applied for this job
-    if(this._credidentialsService.isCandidate){
+    if(this.isCandidate()){
       const appliedJobs: any[] = JSON.parse(localStorage.getItem(jobApplicationsKey));
       if(appliedJobs.includes(+id)) { this.isApplied = true; }
     }

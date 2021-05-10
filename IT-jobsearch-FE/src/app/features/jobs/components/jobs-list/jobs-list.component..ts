@@ -10,6 +10,7 @@ import { JobsService } from '../../services/jobs.service';
 })
 export class JobsListComponent implements OnInit {
   @Input() companyJobs = null;
+  @Input() externalJobs = false;
 
   isLoading = false;
   jobs$: Observable<any[]>

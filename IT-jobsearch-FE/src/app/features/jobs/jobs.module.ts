@@ -11,6 +11,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ProgressSpinnerModule } from 'src/app/shared/components/progress-spinner/progress-spinner.module';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [...fromComponents.components, ...fromPages.pages],
@@ -22,7 +23,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
     NgSelectModule,
     ProgressSpinnerModule,
     MatProgressSpinnerModule,
-    SharedModule
+    SharedModule,
+    ReactiveFormsModule
   ],
   providers: [JobsService, JobApplicationsService],
   exports: [...fromComponents.components, ...fromPages.pages],

@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { HomeComponent } from './home/home.component';
+import { CommonModule } from '@angular/common';;
 import { JobsModule } from './jobs/jobs.module';
 import { LoginModule } from './login/login.module';
 import { CompaniesModule } from './companies/companies.module';
