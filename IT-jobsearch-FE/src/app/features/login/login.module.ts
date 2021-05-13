@@ -8,8 +8,6 @@ import { MatInputModule } from '@angular/material/input';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
-
-
 @NgModule({
   declarations: [LoginComponent],
   imports: [

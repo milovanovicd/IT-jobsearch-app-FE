@@ -16,7 +16,10 @@ export class JobsService {
     return this._http.get(`${environment.apiURL}${this.path}/${id}`);
   }
 
-  getAll(queryString = ""): Observable<any> {
+  getAll(queryString = ''): Observable<any> {
+    if(queryString !== ''){
+      queryString = '?' + queryString;
+    }
     return this._http.get(`${environment.apiURL}${this.path}${queryString}`);
   }
 

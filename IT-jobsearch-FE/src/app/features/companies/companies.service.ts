@@ -16,8 +16,11 @@ export class CompaniesService {
     return this._http.get(`${environment.apiURL}${this.path}/${id}`);
   }
 
-  getAll(): Observable<any> {
-    return this._http.get(`${environment.apiURL}${this.path}`);
+  getAll(queryString = ''): Observable<any> {
+    if(queryString !== ''){
+      queryString = '?' + queryString;
+    }
+    return this._http.get(`${environment.apiURL}${this.path}${queryString}`);
   }
 
   create(data: CreateCompanyDto): Observable<any> {

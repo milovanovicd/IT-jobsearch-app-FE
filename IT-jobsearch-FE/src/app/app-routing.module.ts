@@ -8,7 +8,7 @@ import {
   CompanyProfileJobsComponent,
 } from './features/companies/components';
 import {
-  CompaniesSearchPageComponent,
+  CompanySearchPageComponent,
   CompanyDetailsPageComponent,
   CompanyProfilePageComponent,
 } from './features/companies/pages';
@@ -48,7 +48,7 @@ const routes: Routes = [
   {
     path: 'companies',
     children: [
-      { path: '', component: CompaniesSearchPageComponent },
+      { path: '', component: CompanySearchPageComponent },
       {
         path: 'profile',
         component: CompanyProfilePageComponent,

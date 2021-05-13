@@ -8,7 +8,7 @@
   </div>
 </ng-container>
 
-<ng-container *ngIf="isCompany || externalJobs">
+<ng-container *ngIf="isCompany || isExternal">
   <div class="items">
     <app-job-item
       *ngFor="let job of companyJobs"

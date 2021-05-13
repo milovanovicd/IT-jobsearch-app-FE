@@ -21,7 +21,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
     ReactiveFormsModule,
     MaterialModule,
     SharedModule,
-    NgSelectModule,
+    NgSelectModule
   ],
   providers: [RegistrationService],
   exports: [...fromComponents.components, ...fromPages.pages],

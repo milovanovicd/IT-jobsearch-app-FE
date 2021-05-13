@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { take, tap } from 'rxjs/operators';
 import { CredentialsService } from 'src/app/core/auth/credentials.service';
-import { industries } from 'src/app/shared/mocks/select-arrays';
+import { mapMetadataValues } from 'src/app/shared/helpers/helper-methods';
 import { Company } from 'src/app/shared/models/company.model';
+import { MetadataService } from 'src/app/shared/services/metadata.service';
 import { CompaniesService } from '../../companies.service';
 
 @Component({
@@ -16,16 +17,29 @@ export class CompanyProfileInfoComponent implements OnInit {
   company: Company;
   isEditable = false;
   isLoading = false;
-  industriesArray = industries.map((value) => ({ value, label: value }));
+  industriesArray = [];
 
   constructor(
     private _formBuilder: FormBuilder,
     private _companyService: CompaniesService,
-    private _credidentialsService: CredentialsService
+    private _credidentialsService: CredentialsService,
+    private _metadataService: MetadataService
   ) {}
 
   ngOnInit(): void {
     this.createForm();
+    this.initCompany();
+
+    this._metadataService
+      .getAll()
+      .pipe(take(1))
+      .subscribe(({ industries }) => {
+        this.industriesArray = mapMetadataValues(industries);
+        this.isLoading = false;
+      });
+  }
+
+  private initCompany() {
     const { id } = this._credidentialsService.getCompany();
     this._companyService
       .get(id)
@@ -79,7 +93,7 @@ export class CompanyProfileInfoComponent implements OnInit {
     this.companyForm.enable();
   }
 
-  onCancel(){
+  onCancel() {
     this.toggleEdit();
     this.initForm();
   }

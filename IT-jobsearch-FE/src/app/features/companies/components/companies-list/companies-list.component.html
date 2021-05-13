@@ -1,7 +1,21 @@
-<div class="items" *ngIf="companies$ | async as companies">
-  <app-company-item
-    *ngFor="let company of companies"
-    (click)="details(company.id)"
-    [company]="company"
-  ></app-company-item>
+<ng-container *ngIf="!isExternal">
+  <div class="items" *ngIf="companies$ | async as companies">
+    <app-company-item
+      *ngFor="let company of companies"
+      (click)="details(company.id)"
+      [company]="company"
+    ></app-company-item>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="isExternal">
+  <div class="items">
+    <app-company-item
+      *ngFor="let company of externalCompanies"
+      (click)="details(company.id)"
+      [company]="company"
+    ></app-company-item>
+  </div>
+</ng-container>
+
 <mat-spinner *ngIf="isLoading"></mat-spinner>

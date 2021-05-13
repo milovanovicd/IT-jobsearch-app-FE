@@ -1,59 +1,62 @@
 <section class="jumbotron">
   <div class="search-container">
     <div class="content">
-      <h1>Find your job! You deserve it!</h1>
-      <form [formGroup] = "form">
+      <h1>Find your dream company!</h1>
+      <div>
+        <form [formGroup] = "form">
         <div class="search-input">
           <input formControlName="name" placeholder="Search..." type="text">
           <button class="search">Search</button>
         </div>
         <div class="filters">
+          <!-- Industries -->
           <ng-select
             class="search-filter"
-            [items]="positions"
+            [items]="industries"
             (change) = "filter()"
             bindLabel="label"
             bindValue="value"
             [multiple]="true"
-            placeholder="Select position"
+            placeholder="Select industries"
             clearAllText="Clear"
-            formControlName="positions">
+            formControlName="industries">
           </ng-select>
-        <!-- Positions -->
-        <!-- Seniority -->
+          <!-- Industries -->
+          <!-- Locations -->
           <ng-select
             class="search-filter"
-            [items]="seniorities"
+            [items]="locations"
             (change) = "filter()"
             bindLabel="label"
             bindValue="value"
             [multiple]="true"
-            placeholder="Select seniority"
+            placeholder="Select locations"
             clearAllText="Clear"
-            formControlName="seniorities">
+            formControlName="locations">
           </ng-select>
-        <!-- Seniority -->
+        <!-- Locations -->
         <!-- Technologies -->
           <ng-select
             class="search-filter"
-            [items]="technologies"
+            [items]="noOfEmployees"
             (change) = "filter()"
             bindLabel="label"
             bindValue="value"
             [multiple]="true"
-            placeholder="Technologies..."
+            placeholder="No. of Employees..."
             clearAllText="Clear"
-            formControlName="technologies">
+            formControlName="noOfEmployees">
           </ng-select>
         </div>
       </form>
+      </div>
     </div>
   </div>
 </section>
 <section>
-  <div class="jobs-list">
-    <app-jobs-list *ngIf="!!jobs && jobs.length > 0" [isExternal]="true" [companyJobs]="jobs"></app-jobs-list>
-    <p *ngIf="!!jobs && jobs.length === 0" style="text-align: center;">No results, try again</p>
+  <div class="companies-list">
+    <app-companies-list *ngIf="!!companies && companies.length > 0" [isExternal]="true" [externalCompanies]="companies"></app-companies-list>
+    <p *ngIf="!!companies && companies.length === 0" style="text-align: center;">No results, try again</p>
   </div>
 </section>
-<app-progress-spinner [displayProgressSpinner]="isLoading"></app-progress-spinner>
+

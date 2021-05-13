@@ -11,3 +11,5 @@ export const mapToOptionsArray = (map: Map<number, string>) => {
 };
 
 export const mapMetadataValues = (array: any[]) => array.map(({id, description}) => ({value: description, label: description}));
+
+export const arrayToOptions = (array: string[]) => array.map((value) => ({value, label: value}));

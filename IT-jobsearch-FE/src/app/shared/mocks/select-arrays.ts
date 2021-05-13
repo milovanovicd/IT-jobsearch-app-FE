@@ -1,1 +1,25 @@
-export const industries = ['Software Development', 'QA testing', 'Game Development'];
+export const locationsArray = [
+  'Beograd',
+  'Novi Sad',
+  'Niš',
+  'Kragujevac',
+  'Subotica',
+  'Sombor',
+  'Šabac',
+  'Valjevo',
+  'Kraljevo',
+  'Vršac',
+  'Lajkovac',
+  'Užice',
+  'Aranđelovac',
+  'Jagodina',
+  'Smederevo',
+];
+
+export const noOfEmployeesArray = [
+  '0-25',
+  '25-50',
+  '50-100',
+  '100-150',
+  '150+',
+]

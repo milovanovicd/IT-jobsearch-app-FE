@@ -10,12 +10,12 @@ import { JobsService } from '../../services/jobs.service';
 })
 export class JobsListComponent implements OnInit {
   @Input() companyJobs = null;
-  @Input() externalJobs = false;
+  @Input() isExternal = false;
 
   isLoading = false;
   jobs$: Observable<any[]>
 
-  constructor(private _jobsService:JobsService, private _router: Router) {
+  constructor(private _jobsService: JobsService, private _router: Router) {
     // override the route reuse strategy
     this._router.routeReuseStrategy.shouldReuseRoute = () => false;
    }
@@ -24,7 +24,7 @@ export class JobsListComponent implements OnInit {
     this.jobs$ = this._jobsService.getAll();
   }
 
-  details(id){
+  details(id) {
     this._router.navigate(['jobs/'+id]);
   }
 

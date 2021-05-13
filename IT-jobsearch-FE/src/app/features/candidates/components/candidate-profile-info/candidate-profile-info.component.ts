@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { take, tap } from 'rxjs/operators';
 import { CredentialsService } from 'src/app/core/auth/credentials.service';
-import { industries } from 'src/app/shared/mocks/select-arrays';
+import { mapMetadataValues } from 'src/app/shared/helpers/helper-methods';
 import { Candidate } from 'src/app/shared/models/candidate.model';
+import { MetadataService } from 'src/app/shared/services/metadata.service';
 import { CandidatesService } from '../../candidates.service';
 
 @Component({
@@ -16,16 +17,28 @@ export class CandidateProfileInfoComponent implements OnInit {
   candidate: Candidate;
   isEditable = false;
   isLoading = false;
-  industriesArray = industries.map((value) => ({ value, label: value }));
+  industriesArray = [];
 
   constructor(
     private _formBuilder: FormBuilder,
     private _candidatesService: CandidatesService,
-    private _credidentialsService: CredentialsService
+    private _credidentialsService: CredentialsService,
+    private _metadataService: MetadataService
   ) {}
 
   ngOnInit(): void {
     this.createForm();
+    this.initCandidate();
+    this._metadataService
+      .getAll()
+      .pipe(take(1))
+      .subscribe(({ industries }) => {
+        this.industriesArray = mapMetadataValues(industries);
+        this.isLoading = false;
+      });
+  }
+
+  private initCandidate() {
     const { id } = this._credidentialsService.getCandidate();
     this._candidatesService
       .get(id)
@@ -41,7 +54,7 @@ export class CandidateProfileInfoComponent implements OnInit {
     this.candidateForm = this._formBuilder.group({
       fullName: ['', [Validators.required]],
       address: ['', [Validators.required]],
-      age: ['', [Validators.required, Validators.min(0)]]
+      age: ['', [Validators.required, Validators.min(0)]],
     });
   }
 
@@ -77,7 +90,7 @@ export class CandidateProfileInfoComponent implements OnInit {
     this.candidateForm.enable();
   }
 
-  onCancel(){
+  onCancel() {
     this.toggleEdit();
     this.initForm();
   }
