@@ -4,6 +4,8 @@ import {
   Input,
   OnInit,
 } from '@angular/core';
+import { CompanyDto } from 'src/app/shared/dto/company.dto';
+import { StatusTypeReverseLabel } from 'src/app/shared/enums/enums';
 import { Company } from 'src/app/shared/models/company.model';
 
 @Component({
@@ -13,7 +15,11 @@ import { Company } from 'src/app/shared/models/company.model';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CompanyItemComponent implements OnInit {
-  @Input() company: Company;
+  @Input() company: CompanyDto;
+
+  get activeJobsNo(){
+    return this.company.jobs.filter(job => job.status === "Active").length;
+  }
 
   constructor() {}
 

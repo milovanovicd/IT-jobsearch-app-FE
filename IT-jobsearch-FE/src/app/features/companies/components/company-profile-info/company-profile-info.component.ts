@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { take, tap } from 'rxjs/operators';
 import { CredentialsService } from 'src/app/core/auth/credentials.service';
-import { mapMetadataValues } from 'src/app/shared/helpers/helper-methods';
+import { arrayToOptions, mapMetadataValues } from 'src/app/shared/helpers/helper-methods';
+import { locationsArray } from 'src/app/shared/mocks/select-arrays';
 import { Company } from 'src/app/shared/models/company.model';
 import { MetadataService } from 'src/app/shared/services/metadata.service';
 import { CompaniesService } from '../../companies.service';
@@ -18,6 +19,7 @@ export class CompanyProfileInfoComponent implements OnInit {
   isEditable = false;
   isLoading = false;
   industriesArray = [];
+  locations = [];
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -29,6 +31,8 @@ export class CompanyProfileInfoComponent implements OnInit {
   ngOnInit(): void {
     this.createForm();
     this.initCompany();
+
+    this.locations = arrayToOptions(locationsArray);
 
     this._metadataService
       .getAll()
@@ -54,7 +58,7 @@ export class CompanyProfileInfoComponent implements OnInit {
   createForm() {
     this.companyForm = this._formBuilder.group({
       name: ['', [Validators.required]],
-      description: ['', [Validators.required]],
+      description: ['', [Validators.required,Validators.maxLength(250)]],
       location: ['', Validators.required],
       noOfEmployees: ['', [Validators.required, Validators.min(0)]],
       industry: ['', Validators.required],

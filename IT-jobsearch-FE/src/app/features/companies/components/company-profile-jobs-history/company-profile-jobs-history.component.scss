@@ -4,9 +4,16 @@
   .container {
     width: 100%;
 
-    .active {
-      color: #1eae98;
+    .inactive, .expired {
       font-weight: bold;
+    }
+
+    .expired {
+      color: #687980;
+    }
+
+    .inactive {
+      color: #f05945;
     }
 
     .actions {

@@ -22,7 +22,10 @@ export class JobApplicationsService {
   }
 
   remove(jobId: any, candidateId: any) {
-    console.log("DELETE");
     return this._http.delete(`${environment.apiURL}${this.path}/${jobId}/${candidateId}`);
+  }
+
+  removeByJob(jobId: any) {
+    return this._http.delete(`${environment.apiURL}${this.path}/${jobId}`);
   }
 }

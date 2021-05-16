@@ -14,8 +14,6 @@
   .container {
     position: relative;
     h1 {
-      position: absolute;
-      top: 50px;
       font-size: 36px;
     }
     border-radius: 15px;
@@ -27,6 +25,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
     .form-container {
       width: 400px;
       margin-bottom: 15px;
@@ -42,9 +41,14 @@
       }
       .control {
         margin: 0;
+        padding: 5px 0px;
+
         label {
+          box-sizing: border-box;
           margin-bottom: 10px;
+          padding-top: 10px;
         }
+
         input {
           border-radius: 4px;
           border-color: rgb(0, 0, 0, 0.3);
@@ -52,7 +56,14 @@
           margin-bottom: 15px;
           display: block;
           width: 100%;
-          // box-sizing:border-box;
+
+          &.ng-invalid {
+            margin-bottom: 5px;
+          }
+        }
+
+        mat-error ::ng-deep {
+          font-size: 14px;
         }
       }
     }

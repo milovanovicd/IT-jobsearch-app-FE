@@ -1,7 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatAccordion } from '@angular/material/expansion';
 import { Observable } from 'rxjs';
-import { JobsService } from 'src/app/features/jobs/services/jobs.service';
+import { map } from 'rxjs/operators';
+import { CredentialsService } from 'src/app/core/auth/credentials.service';
+import { CompaniesService } from '../../companies.service';
 
 @Component({
   selector: 'app-company-profile-applications',
@@ -14,9 +16,9 @@ export class CompanyProfileApplicationsComponent implements OnInit {
   jobs$: Observable<any[]>
   displayedColumns: string[] = ['name', 'appliedDate', 'age', 'actions'];
 
-  constructor(private _jobsService: JobsService) { }
+  constructor(private _companyService: CompaniesService, private _credentialsService: CredentialsService) { }
 
   ngOnInit() {
-    this.jobs$ = this._jobsService.getAll();
+    this.jobs$ = this._companyService.get(this._credentialsService.getCompany().id).pipe(map(company => company.jobs));
   }
 }

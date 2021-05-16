@@ -35,6 +35,9 @@ export class ResumeUploadComponent implements OnInit {
       this.resumeValueChanged.emit(fileDownloadUri);
       // this.isLoading = false;
       this.loading.emit(false);
+    }, (error) => {
+      console.log('Error', error);
+      this.loading.emit(false);
     })
   }
 

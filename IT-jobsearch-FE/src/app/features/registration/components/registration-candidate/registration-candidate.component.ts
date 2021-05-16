@@ -41,6 +41,10 @@ export class RegistrationCandidateComponent implements OnInit {
       console.log(response);
       this.submittingObject.isLoading = false;
       this.submittingObject.isSuccess = true;
+    }, (error) => {
+      console.log('Error', error);
+      this.submittingObject.isLoading = false;
+      this.submittingObject.isSuccess = false;
     });
 
   }

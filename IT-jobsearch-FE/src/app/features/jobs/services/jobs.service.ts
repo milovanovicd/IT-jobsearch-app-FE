@@ -34,4 +34,8 @@ export class JobsService {
   remove(id: any) {
     return this._http.delete(`${environment.apiURL}${this.path}/${id}`);
   }
+
+  checkExpired(){
+    return this._http.put(`${environment.apiURL}${this.path}/checkExpired`, null);
+  }
 }

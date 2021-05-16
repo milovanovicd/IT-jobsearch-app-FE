@@ -10,16 +10,18 @@
         <div class="control">
           <label>Email:</label>
           <input type="email" placeholder="Enter your email..." formControlName="email" required/>
-          <!-- <mat-error *ngIf="loginForm.controls['email'].valid || loginForm.controls['email'].untouched">
-            <span>EMAIL_IS_REQUIRED</span>
-          </mat-error> -->
+          <mat-error *ngIf="loginForm.controls.email.touched && loginForm.controls.email.invalid">
+            <span *ngIf="loginForm.controls.email.errors.required">Email is required</span>
+            <span *ngIf="loginForm.controls.email.errors.pattern">Email invalid format</span>
+          </mat-error>
         </div>
         <div class="control">
           <label>Password:</label>
           <input type="password" placeholder="Enter your password..." formControlName="password" />
-          <!-- <mat-error *ngIf="loginForm.controls['password'].valid || loginForm.controls['password'].untouched">
-            <span>PASSWORD_IS_REQUIRED</span>
-          </mat-error> -->
+          <mat-error *ngIf="loginForm.controls.password.touched && loginForm.controls.password.invalid">
+            <span *ngIf="loginForm.controls.password.errors.required">Password is required</span>
+            <span *ngIf="loginForm.controls.password.errors.minlength">Password minimum length is 6</span>
+          </mat-error>
         </div>
         <mat-slide-toggle color="primary" formControlName="remember">Remember me</mat-slide-toggle>
         <button mat-flat-button color="primary" type="submit" [disabled]="loginForm.invalid || isLoading">

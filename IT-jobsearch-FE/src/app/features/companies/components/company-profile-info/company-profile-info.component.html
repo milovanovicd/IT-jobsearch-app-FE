@@ -22,13 +22,17 @@
     </mat-form-field>
     <!-- Description -->
     <!-- Location -->
-    <mat-form-field class="form-field width-50" appearance="outline">
-      <mat-label>Location</mat-label>
-      <input matInput placeholder="Location" formControlName="location" required>
-      <mat-error *ngIf="companyForm.controls.location.touched && companyForm.controls.location.invalid">
-        <span *ngIf="companyForm.controls.location.errors.required">This field is required.</span>
-      </mat-error>
-    </mat-form-field>
+    <div class="form-field width-50">
+      <ng-select
+        [items]="locations"
+        bindLabel="label"
+        bindValue="value"
+        [multiple]="false"
+        placeholder="Select Location"
+        clearAllText="Clear"
+        formControlName="location">
+      </ng-select>
+    </div>
     <!-- Location -->
     <!-- No. of Employees -->
     <mat-form-field class="form-field width-50" appearance="outline">
@@ -51,13 +55,6 @@
         formControlName="industry">
       </ng-select>
     </div>
-    <!-- <mat-form-field class="form-field" appearance="outline">
-      <mat-label>Industry</mat-label>
-      <input matInput placeholder="Industry" formControlName="industry" required>
-      <mat-error *ngIf="companyForm.controls.industry.touched && companyForm.controls.industry.invalid">
-        <span *ngIf="companyForm.controls.industry.errors.required">This field is required.</span>
-      </mat-error>
-    </mat-form-field> -->
     <!-- Industry -->
     <div class="form-buttons">
       <button *ngIf='isEditable' mat-raised-button color="primary" type="submit">Save</button>

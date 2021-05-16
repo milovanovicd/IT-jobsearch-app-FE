@@ -1,5 +1,5 @@
 <div mat-dialog-title>
-  Create Job
+  {{title}}
 </div>
 <mat-dialog-content class="mat-typography">
   <app-progress-spinner [displayProgressSpinner]="isLoading"></app-progress-spinner>
@@ -97,7 +97,7 @@
   <button
     mat-flat-button
     color="primary"
-    [disabled]="!form.valid"
+    [disabled]="!form.valid || !datesValid"
     (click)="submit()"
   >
     Submit

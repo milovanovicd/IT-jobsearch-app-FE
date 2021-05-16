@@ -12,7 +12,7 @@
     <div class="company-info">
       <span class="icon"><embed src="../../../../../assets/location.svg"/>{{company.location}}</span>
       <span class="icon"><embed src="../../../../../assets/employees.svg"/>{{company.noOfEmployees}}</span>
-      <span class="icon"><embed src="../../../../../assets/jobs.svg"/>{{company.jobs.length}} open jobs</span>
+      <span class="icon"><embed src="../../../../../assets/jobs.svg"/>{{activeJobsNo}} open jobs</span>
     </div>
   </div>
   <div class="job-description">
@@ -22,6 +22,6 @@
 
   <div class="job-description">
     <h2>Jobs</h2>
-    <app-jobs-list [companyJobs]="company.jobs.slice(0,4)"></app-jobs-list>
+    <app-jobs-list [companyJobs]="similarJobs"></app-jobs-list>
   </div>
 </section>

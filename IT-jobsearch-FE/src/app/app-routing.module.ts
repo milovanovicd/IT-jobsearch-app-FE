@@ -6,6 +6,7 @@ import {
   CompanyProfileApplicationsComponent,
   CompanyProfileInfoComponent,
   CompanyProfileJobsComponent,
+  CompanyProfileJobsHistoryComponent,
 } from './features/companies/components';
 import {
   CompanySearchPageComponent,
@@ -64,6 +65,7 @@ const routes: Routes = [
       { path: '', redirectTo: 'profile', pathMatch: 'full' },
       { path: 'profile', component: CompanyProfileInfoComponent },
       { path: 'jobs', component: CompanyProfileJobsComponent },
+      { path: 'jobs-history', component: CompanyProfileJobsHistoryComponent },
       { path: 'applications', component: CompanyProfileApplicationsComponent },
     ],
   },

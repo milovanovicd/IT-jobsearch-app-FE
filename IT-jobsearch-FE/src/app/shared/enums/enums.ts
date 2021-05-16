@@ -18,3 +18,21 @@ export const SeniorityTypeReverseLabel = new Map<string, number>([
   [ 'Senior', SeniorityType.Senior],
   [ 'Lead', SeniorityType.Lead],
 ]);
+
+export enum StatusType {
+  Active = 1,
+  Inactive = 2,
+  Expired = 3
+}
+
+export const StatusTypeLabel = new Map<number, string>([
+  [StatusType.Active, 'Active'],
+  [StatusType.Inactive, 'Inactive'],
+  [StatusType.Expired, 'Expired']
+]);
+
+export const StatusTypeReverseLabel = new Map<string, number>([
+  [ 'Active', StatusType.Active],
+  [ 'Inactive', StatusType.Inactive],
+  [ 'Expired', StatusType.Expired]
+]);

@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { take } from 'rxjs/operators';
 import { CredentialsService } from 'src/app/core/auth/credentials.service';
-import { SeniorityTypeLabel, SeniorityTypeReverseLabel } from 'src/app/shared/enums/enums';
+import { SeniorityTypeLabel, SeniorityTypeReverseLabel, StatusType, StatusTypeLabel, StatusTypeReverseLabel } from 'src/app/shared/enums/enums';
 import { mapMetadataValues, mapToArray } from 'src/app/shared/helpers/helper-methods';
 import { MetadataService } from 'src/app/shared/services/metadata.service';
 import * as moment from 'moment';
@@ -21,6 +21,19 @@ export class CompanyJobDialogComponent implements OnInit {
   positions = [];
   seniorities = [];
   technologies = [];
+  title = "Create Job";
+
+  get isUpdate(){
+    return !!this.job;
+  }
+
+  get isRenew() {
+    return !!this.job && this.job.isRenew;
+  }
+
+  get datesValid() {
+    return this.form.get('publishedDate').value !== null && this.form.get('deadlineDate').value !== null;
+  }
 
   constructor(
     private _fb: FormBuilder,
@@ -35,14 +48,21 @@ export class CompanyJobDialogComponent implements OnInit {
 
     this.createForm();
 
-    if (!!this.job) {
+    if (this.isUpdate) {
       this.prepareForUpdate();
+      this.title = "Update Job";
     }
+
+    if (this.isRenew) {
+      this.prepareForRenew();
+      this.title = "Renew Job"
+    }
+
     this.minDate = this.form.getRawValue().publishedDate;
 
     this.fillOptions();
-
   }
+
 
   submit(){
     const formData = this.form.getRawValue();
@@ -70,20 +90,34 @@ export class CompanyJobDialogComponent implements OnInit {
     const updatedJob = {
       ...this.job,
       seniority: SeniorityTypeReverseLabel.get(this.job.seniority),
+      status: StatusTypeReverseLabel.get(this.job.status),
       publishedDate: new Date(this.job.publishedDate),
-      deadlineDate: new Date(this.job.publishedDate),
+      deadlineDate: new Date(this.job.deadlineDate),
     };
+    this.form.patchValue(updatedJob);
+  }
+
+  prepareForRenew(){
+    const updatedJob = {
+      ...this.job,
+      seniority: SeniorityTypeReverseLabel.get(this.job.seniority),
+      status: StatusType.Active,
+      publishedDate: new Date(),
+      deadlineDate: null,
+    };
+
     this.form.patchValue(updatedJob);
   }
 
   createForm() {
     this.form = this._fb.group({
       name: [null, Validators.required],
-      description: [null, Validators.required],
+      description: [null, [Validators.required, Validators.maxLength(250)]],
       publishedDate: [{value: new Date(), disabled: true}, Validators.required],
       deadlineDate: [{value: null, disabled: true}, Validators.required],
       position: [null, Validators.required],
       seniority: [null, Validators.required],
+      status: [{value: StatusType.Active, disabled: true}, Validators.required],
       companyId: [this.companyId, Validators.required],
       technologies: [null, Validators.required],
     });

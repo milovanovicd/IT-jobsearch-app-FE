@@ -4,6 +4,8 @@ import { take } from 'rxjs/operators';
 import { AuthService } from 'src/app/core/auth/auth.service';
 import { CreateCompanyDto } from 'src/app/shared/dto/createCompany.dto';
 import { UserDto } from 'src/app/shared/dto/user.dto';
+import { arrayToOptions } from 'src/app/shared/helpers/helper-methods';
+import { locationsArray } from 'src/app/shared/mocks/select-arrays';
 import { MetadataService } from 'src/app/shared/services/metadata.service';
 
 @Component({
@@ -18,6 +20,7 @@ export class RegistrationCompanyComponent implements OnInit {
   isLoading = false;
   form: FormGroup;
   industries: any[];
+  locations: any[];
 
   constructor(
     private _fb: FormBuilder,
@@ -32,6 +35,7 @@ export class RegistrationCompanyComponent implements OnInit {
 
   initMetadata() {
     this.isLoading = true;
+    this.locations = arrayToOptions(locationsArray);
     this._metadataService
       .getAll()
       .pipe(take(1))
@@ -47,7 +51,7 @@ export class RegistrationCompanyComponent implements OnInit {
     this.form = this._fb.group({
       name: ['', Validators.required],
       email: [{ value: this.user.username, disabled: true }],
-      description: ['', Validators.required],
+      description: ['', [Validators.required, Validators.maxLength(250)]],
       location: ['', Validators.required],
       industry: ['', Validators.required],
       noOfEmployees: ['', [Validators.required, Validators.min(0)]],
@@ -63,6 +67,10 @@ export class RegistrationCompanyComponent implements OnInit {
       this.submittingObject.isLoading = false;
       this.submittingObject.isSuccess = true;
       console.log('Updated company', response);
+    }, (error) => {
+      console.log('Error', error);
+      this.submittingObject.isLoading = false;
+      this.submittingObject.isSuccess = false;
     } );
 
   }

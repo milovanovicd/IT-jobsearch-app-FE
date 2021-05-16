@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { CompaniesService } from '../../companies.service';
 import { CompanyDto } from 'src/app/shared/dto/company.dto';
+import { CompanyJobDto } from 'src/app/shared/dto/companyJob.dto';
 
 @Component({
   selector: 'app-company-details',
@@ -13,6 +14,19 @@ import { CompanyDto } from 'src/app/shared/dto/company.dto';
 export class CompanyDetailsPageComponent implements OnInit {
   isLoading = false;
   company$: Observable<CompanyDto> = null;
+  activeJobs: CompanyJobDto[] = [];
+
+  get similarJobs() {
+    return this.getActiveJobs(this.activeJobs).slice(0,4);
+  }
+
+  get activeJobsNo(){
+    return this.activeJobs.length;
+  }
+
+  getActiveJobs(jobs) {
+    return jobs.filter(job => job.status === "Active");
+  }
 
   constructor(
     private _companiesService: CompaniesService,
@@ -26,6 +40,7 @@ export class CompanyDetailsPageComponent implements OnInit {
       .get(id)
       .pipe(tap((company) => {
         console.log(company);
+        this.activeJobs = this.getActiveJobs(company.jobs);
         this.isLoading = false;
       }));
   }

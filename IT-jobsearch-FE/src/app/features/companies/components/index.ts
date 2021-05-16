@@ -3,6 +3,7 @@ import { CompanyItemComponent } from './company-item/company-item.component';
 import { CompanyJobDialogComponent } from './company-job-dialog/company-job-dialog.component';
 import { CompanyProfileApplicationsComponent } from './company-profile-applications/company-profile-applications.component';
 import { CompanyProfileInfoComponent } from './company-profile-info/company-profile-info.component';
+import { CompanyProfileJobsHistoryComponent } from './company-profile-jobs-history/company-profile-jobs-history.component';
 import { CompanyProfileJobsComponent } from './company-profile-jobs/company-profile-jobs.component';
 
 export const components: any[] = [
@@ -11,6 +12,7 @@ export const components: any[] = [
   CompanyProfileInfoComponent,
   CompanyProfileJobsComponent,
   CompanyProfileApplicationsComponent,
+  CompanyProfileJobsHistoryComponent,
   CompanyJobDialogComponent
 ];
 
@@ -20,5 +22,6 @@ export { CompanyJobDialogComponent } from './company-job-dialog/company-job-dial
 export { CompanyProfileApplicationsComponent } from './company-profile-applications/company-profile-applications.component';
 export { CompanyProfileInfoComponent } from './company-profile-info/company-profile-info.component';
 export { CompanyProfileJobsComponent } from './company-profile-jobs/company-profile-jobs.component';
+export { CompanyProfileJobsHistoryComponent } from './company-profile-jobs-history/company-profile-jobs-history.component';
 
 

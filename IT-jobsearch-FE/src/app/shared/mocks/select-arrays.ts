@@ -1,6 +1,5 @@
 export const locationsArray = [
   'Beograd',
-  'Novi Sad',
   'Niš',
   'Kragujevac',
   'Subotica',

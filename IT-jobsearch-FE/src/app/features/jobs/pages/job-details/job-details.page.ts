@@ -7,6 +7,7 @@ import { CredentialsService } from 'src/app/core/auth/credentials.service';
 import { MatDialog } from '@angular/material/dialog';
 import { JobAplicationDialogComponent } from '../../components/job-aplication-dialog/job-aplication-dialog.component';
 import { CandidatesService } from 'src/app/features/candidates/candidates.service';
+import { CompanyJobDto } from 'src/app/shared/dto/companyJob.dto';
 
 const jobApplicationsKey = 'jobApplications';
 @Component({
@@ -18,6 +19,11 @@ export class JobDetailsPageComponent implements OnInit {
   isLoading = false;
   isApplied = false;
   job$: Observable<any> = null;
+  companyJobs: CompanyJobDto[] = [];
+
+  get similarJobs() {
+    return this.companyJobs.filter((job) => job.status === "Active").slice(0,4);
+  }
 
   constructor(
     public dialog: MatDialog,
@@ -32,7 +38,10 @@ export class JobDetailsPageComponent implements OnInit {
     this.isLoading = true;
     this.job$ = this._jobsService
       .get(id)
-      .pipe(tap((_) => (this.isLoading = false)));
+      .pipe(tap((job) => {
+        this.companyJobs = job.company.jobs;
+        this.isLoading = false;
+      }));
 
     // Check if candidate has already applied for this job
     if(this.isCandidate()){
