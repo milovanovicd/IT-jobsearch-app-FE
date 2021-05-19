@@ -114,7 +114,7 @@ export class CompanyJobDialogComponent implements OnInit {
       name: [null, Validators.required],
       description: [null, [Validators.required, Validators.maxLength(250)]],
       publishedDate: [{value: new Date(), disabled: true}, Validators.required],
-      deadlineDate: [{value: null, disabled: true}, Validators.required],
+      deadlineDate: [null, Validators.required],
       position: [null, Validators.required],
       seniority: [null, Validators.required],
       status: [{value: StatusType.Active, disabled: true}, Validators.required],

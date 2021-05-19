@@ -33,7 +33,7 @@
     <!-- Deadline Date -->
     <mat-form-field class="form-field" appearance="outline">
       <mat-label>Deadline Date</mat-label>
-      <input matInput [matDatepicker]="deadlineDatePicker" [min]="minDate" formControlName="deadlineDate">
+      <input matInput readonly (focus)="deadlineDatePicker.open()" (click)="deadlineDatePicker.open()" [matDatepicker]="deadlineDatePicker" [min]="minDate" formControlName="deadlineDate">
       <mat-datepicker-toggle matSuffix [for]="deadlineDatePicker"></mat-datepicker-toggle>
       <mat-datepicker #deadlineDatePicker disabled="false"></mat-datepicker>
     </mat-form-field>

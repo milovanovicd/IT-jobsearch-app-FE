@@ -1,49 +1,76 @@
 <h1>Job Applications</h1>
-<div class="example-action-buttons">
-  <button mat-button (click)="accordion.openAll()">Expand All</button>
-  <button mat-button (click)="accordion.closeAll()">Collapse All</button>
-</div>
-<mat-accordion class="example-headers-align" multi *ngIf="jobs$ | async as jobs">
-  <mat-expansion-panel *ngFor="let job of jobs" [disabled]="job.jobApplications.length === 0">
-    <mat-expansion-panel-header >
-      <mat-panel-title>
-        {{job.name}}
-      </mat-panel-title>
-      <mat-panel-description>
-        Applications: {{job.jobApplications.length}}
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-      <table mat-table [dataSource]="job.jobApplications" class="table mat-elevation-z8">
-        <!-- Name Column -->
-        <ng-container matColumnDef="name">
-          <th mat-header-cell *matHeaderCellDef>Name</th>
-          <td mat-cell *matCellDef="let element">{{element.candidate.fullName}} </td>
-        </ng-container>
+<ng-container *ngIf="jobs$ | async as jobs">
+  <ng-container *ngIf="jobs.length > 0">
+    <div class="example-action-buttons">
+      <button mat-button (click)="accordion.openAll()">Expand All</button>
+      <button mat-button (click)="accordion.closeAll()">Collapse All</button>
+    </div>
+    <mat-accordion class="example-headers-align" multi>
+      <mat-expansion-panel
+        *ngFor="let job of jobs"
+        [disabled]="job.jobApplications.length === 0"
+      >
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{ job.name }}
+          </mat-panel-title>
+          <mat-panel-description>
+            Applications: {{ job.jobApplications.length }}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <table
+          mat-table
+          [dataSource]="job.jobApplications"
+          class="table mat-elevation-z8"
+        >
+          <!-- Name Column -->
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>Name</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.candidate.fullName }}
+            </td>
+          </ng-container>
 
-        <!-- Applied Date Column -->
-        <ng-container matColumnDef="appliedDate">
-          <th mat-header-cell *matHeaderCellDef>Applied Date</th>
-          <td mat-cell *matCellDef="let element">{{element.createdOn | date}}</td>
-        </ng-container>
+          <!-- Applied Date Column -->
+          <ng-container matColumnDef="appliedDate">
+            <th mat-header-cell *matHeaderCellDef>Applied Date</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.createdOn | date }}
+            </td>
+          </ng-container>
 
-        <!-- Age Column -->
-        <ng-container matColumnDef="age">
-          <th mat-header-cell *matHeaderCellDef>Age</th>
-          <td mat-cell *matCellDef="let element">{{element.candidate.age}}</td>
-        </ng-container>
+          <!-- Age Column -->
+          <ng-container matColumnDef="age">
+            <th mat-header-cell *matHeaderCellDef>Age</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.candidate.age }}
+            </td>
+          </ng-container>
 
-        <ng-container matColumnDef="actions">
-          <th mat-header-cell *matHeaderCellDef style="text-align: center;" >Actions</th>
-          <td mat-cell *matCellDef="let row" style="text-align: center;">
-            <a mat-button matTooltip="Click to Download"  color="primary" [href]="row.candidate.resume">
-              <mat-icon aria-label="Download">arrow_downward</mat-icon>
-              Download Resume
-            </a>
-          </td>
-        </ng-container>
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef style="text-align: center">
+              Actions
+            </th>
+            <td mat-cell *matCellDef="let row" style="text-align: center">
+              <a
+                mat-button
+                matTooltip="Click to Download"
+                color="primary"
+                [href]="row.candidate.resume"
+              >
+                <mat-icon aria-label="Download">arrow_downward</mat-icon>
+                Download Resume
+              </a>
+            </td>
+          </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-      </table>
-  </mat-expansion-panel>
-</mat-accordion>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </ng-container>
+  <ng-container *ngIf="jobs.length === 0">
+    <p>No jobs posted, add one!</p>
+  </ng-container>
+</ng-container>

@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { take } from 'rxjs/operators';
 import { AuthService } from 'src/app/core/auth/auth.service';
 import { CreateCandidateDto } from 'src/app/shared/dto/createCandidate.dto';
@@ -17,7 +18,7 @@ export class RegistrationCandidateComponent implements OnInit {
 
   form: FormGroup;
 
-  constructor(private _fb: FormBuilder, private _authService: AuthService) {}
+  constructor(private _fb: FormBuilder, private _authService: AuthService, private _snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
     this.initForm();
@@ -38,11 +39,12 @@ export class RegistrationCandidateComponent implements OnInit {
     const candidate = this.prepareFieldsForCreate(this.form.value);
     this.submittingObject.isLoading = true;
     this._authService.registerCandidate(this.user.candidate.id, candidate).pipe(take(1)).subscribe((response) => {
-      console.log(response);
+      this.openSnackBar("Registration successfull!");
       this.submittingObject.isLoading = false;
       this.submittingObject.isSuccess = true;
-    }, (error) => {
+    }, ({error}) => {
       console.log('Error', error);
+      this.openSnackBar(error.message);
       this.submittingObject.isLoading = false;
       this.submittingObject.isSuccess = false;
     });
@@ -56,6 +58,10 @@ export class RegistrationCandidateComponent implements OnInit {
       address: form.address,
       age: form.age
     };
+  }
+
+  openSnackBar(message: string, action = 'Close') {
+    this._snackBar.open(message, action);
   }
 
 }

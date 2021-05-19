@@ -1,9 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { CandidateProfileInfoComponent, CandidateProfileJobsComponent, CandidateProfileResumeComponent } from './features/candidates/components';
+import { AuthGuard } from './core/auth/auth.guard';
+import { Role } from './core/auth/role.enum';
+import { RoleGuard } from './core/guard/role.guard';
+import { CandidateProfileDeleteAccountComponent, CandidateProfileInfoComponent, CandidateProfileJobsComponent, CandidateProfileResumeComponent } from './features/candidates/components';
 import { CandidateProfilePageComponent } from './features/candidates/pages';
 import {
   CompanyProfileApplicationsComponent,
+  CompanyProfileDeleteAccountComponent,
   CompanyProfileInfoComponent,
   CompanyProfileJobsComponent,
   CompanyProfileJobsHistoryComponent,
@@ -60,6 +64,8 @@ const routes: Routes = [
   },
   {
     path: 'company-profile',
+    canActivate: [AuthGuard, RoleGuard],
+    data: { roles: [Role.Company] },
     component: CompanyProfilePageComponent,
     children: [
       { path: '', redirectTo: 'profile', pathMatch: 'full' },
@@ -67,16 +73,20 @@ const routes: Routes = [
       { path: 'jobs', component: CompanyProfileJobsComponent },
       { path: 'jobs-history', component: CompanyProfileJobsHistoryComponent },
       { path: 'applications', component: CompanyProfileApplicationsComponent },
+      { path: 'delete-account', component: CompanyProfileDeleteAccountComponent },
     ],
   },
   {
     path: 'candidate-profile',
+    canActivate: [AuthGuard, RoleGuard],
+    data: { roles: [Role.Candidate] },
     component: CandidateProfilePageComponent,
     children: [
       { path: '', redirectTo: 'profile', pathMatch: 'full' },
       { path: 'profile', component: CandidateProfileInfoComponent },
       { path: 'jobs', component: CandidateProfileJobsComponent },
       { path: 'resume', component: CandidateProfileResumeComponent },
+      { path: 'delete-account', component: CandidateProfileDeleteAccountComponent },
     ],
   },
   // Fallback when no prior route is matched

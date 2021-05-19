@@ -3,7 +3,7 @@
     <h1>Jobs History</h1>
   </div>
     <div class="jobs" *ngIf="jobs$ | async as jobs">
-      <ng-container *ngIf="jobs.length !== 0">
+      <ng-container *ngIf="jobs.length > 0">
         <table mat-table [dataSource]="jobs" class="mat-elevation-z8">
           <!-- Position Column -->
           <ng-container matColumnDef="name">

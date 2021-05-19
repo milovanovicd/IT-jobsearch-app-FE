@@ -31,7 +31,7 @@
     </mat-form-field>
     <!-- Age -->
     <div class="form-buttons">
-      <button *ngIf='isEditable' mat-raised-button color="primary" type="submit">Save</button>
+      <button *ngIf='isEditable' [disabled]="candidateForm.invalid" mat-raised-button color="primary" type="submit">Save</button>
       <button *ngIf='isEditable' mat-raised-button color="warn" (click)='onCancel()'>Cancel</button>
       <button *ngIf='!isEditable' mat-raised-button color="primary" (click)='toggleEdit()'>Edit</button>
     </div>

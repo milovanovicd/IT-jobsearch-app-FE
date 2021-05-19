@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { take } from 'rxjs/operators';
 import { AuthService } from 'src/app/core/auth/auth.service';
 import { CreateCompanyDto } from 'src/app/shared/dto/createCompany.dto';
@@ -25,7 +26,8 @@ export class RegistrationCompanyComponent implements OnInit {
   constructor(
     private _fb: FormBuilder,
     private _metadataService: MetadataService,
-    private _authService: AuthService
+    private _authService: AuthService,
+    private _snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -66,9 +68,9 @@ export class RegistrationCompanyComponent implements OnInit {
     this._authService.registerCompany(this.user.company.id, company).pipe(take(1)).subscribe((response) => {
       this.submittingObject.isLoading = false;
       this.submittingObject.isSuccess = true;
-      console.log('Updated company', response);
-    }, (error) => {
-      console.log('Error', error);
+      this.openSnackBar("Registration successfull!");
+    }, ({error}) => {
+      this.openSnackBar(error.message);
       this.submittingObject.isLoading = false;
       this.submittingObject.isSuccess = false;
     } );
@@ -88,5 +90,9 @@ export class RegistrationCompanyComponent implements OnInit {
 
   addIndustryTag(tag: string){
     return {value: tag, label: tag};
+  }
+
+  openSnackBar(message: string, action = 'Close') {
+    this._snackBar.open(message, action);
   }
 }
