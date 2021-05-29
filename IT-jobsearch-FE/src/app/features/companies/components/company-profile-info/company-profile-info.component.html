@@ -19,6 +19,9 @@
       <mat-error *ngIf="companyForm.controls.description.touched && companyForm.controls.description.invalid">
         <span *ngIf="companyForm.controls.description.errors.required">This field is required.</span>
       </mat-error>
+      <mat-error *ngIf="companyForm.controls.description.touched && companyForm.controls.description.hasError('maxlength')">
+        The maximum number of characters is 250
+      </mat-error>
     </mat-form-field>
     <!-- Description -->
     <!-- Location -->

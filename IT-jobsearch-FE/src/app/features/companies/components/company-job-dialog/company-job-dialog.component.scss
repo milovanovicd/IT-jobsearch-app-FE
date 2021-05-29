@@ -1,10 +1,5 @@
 @import "../../../../shared/utilities/variables.scss";
 
-::ng-deep .mat-dialog-container,
-.mat-dialog-content {
-  overflow: unset;
-}
-
 .mat-dialog-actions {
   margin-left: -24px;
   margin-right: -24px;

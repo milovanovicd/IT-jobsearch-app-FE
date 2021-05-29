@@ -17,7 +17,7 @@ export class CompanyDetailsPageComponent implements OnInit {
   activeJobs: CompanyJobDto[] = [];
 
   get similarJobs() {
-    return this.getActiveJobs(this.activeJobs).slice(0,4);
+    return this.getActiveJobs(this.activeJobs).slice(0,5);
   }
 
   get activeJobsNo(){

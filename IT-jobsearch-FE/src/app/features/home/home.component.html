@@ -13,9 +13,15 @@
 </section>
 <section class="feature-jobs">
   <h1>Featured Jobs</h1>
-  <app-jobs-list></app-jobs-list>
+  <app-jobs-list [isExternal]="true" [companyJobs]="jobs"></app-jobs-list>
+  <div class="see-more">
+    <button (click)="onSeeMoreJobs()" class="see-more-btn" *ngIf="jobs && jobs.length > 4" mat-raised-button color="primary">See all jobs</button>
+  </div>
 </section>
 <section class="feature-companies">
   <h1>Featured Companies</h1>
-  <app-companies-list></app-companies-list>
+  <app-companies-list [isExternal]="true" [externalCompanies]="companies"></app-companies-list>
+  <div class="see-more" style="margin-bottom: 30px;">
+    <button (click)="onSeeMoreCompanies()" class="see-more-btn" *ngIf="companies && companies.length > 4" mat-raised-button color="primary">See all companies</button>
+  </div>
 </section>

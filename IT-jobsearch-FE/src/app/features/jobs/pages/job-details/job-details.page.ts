@@ -22,7 +22,7 @@ export class JobDetailsPageComponent implements OnInit {
   companyJobs: CompanyJobDto[] = [];
 
   get similarJobs() {
-    return this.companyJobs.filter((job) => job.status === "Active").slice(0,4);
+    return this.companyJobs.filter((job) => job.status === "Active").slice(0,5);
   }
 
   constructor(

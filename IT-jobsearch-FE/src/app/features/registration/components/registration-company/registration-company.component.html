@@ -26,6 +26,9 @@
   <mat-form-field class="form-field" appearance="legacy">
     <mat-label>Description</mat-label>
     <textarea matInput formControlName="description"></textarea>
+    <mat-error *ngIf="form.controls.description.touched && form.controls.description.hasError('maxlength')">
+      The maximum number of characters is 250
+    </mat-error>
   </mat-form-field>
   <!-- Industry -->
   <div class="form-field">
